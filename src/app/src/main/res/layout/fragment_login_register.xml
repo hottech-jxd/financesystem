@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto">-->
+
+    <!--<data>-->
+        <!--<variable-->
+            <!--name="bean"-->
+            <!--type="com.cunyn.android.financesystem.viewmodel.UserViewModel" />-->
+    <!--</data>-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include android:id="@+id/loginregister_header"
+        android:layout_width="match_parent"
+        layout="@layout/layout_header"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.widget.NestedScrollView
+    android:layout_below="@id/loginregister_header"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/loginregister_container"
+    android:layout_width="match_parent"
+    android:background="#f02d57"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LoginRegisterFragment">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/loginregister_bg"
+        android:minHeight="@dimen/dp_150"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_30"
+        app:layout_constraintTop_toBottomOf="@id/loginregister_bg"
+        android:layout_width="match_parent"
+        android:id="@+id/loginregister_phone_lay"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:padding="@dimen/dp_2"
+        android:background="@drawable/shape_bg"
+        android:layout_height="wrap_content">
+    <EditText
+        android:background="@drawable/shape_editetext_bg"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_12"
+        app:layout_constraintTop_toBottomOf="@id/loginregister_bg"
+        android:id="@+id/loginRegister_phone"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/dp_15"
+        android:textColor="@color/text_color_2B3041"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:hint="@string/inputphone"
+        android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:padding="@dimen/dp_2"
+        app:layout_constraintTop_toBottomOf="@id/loginregister_phone_lay"
+        android:id="@+id/loginregister_smscode_lay"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_bg"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/loginregister_smscode"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="@string/inputsmscode"
+            android:textColor="@color/text_color_2B3041"
+            android:background="@drawable/shape_editetext_bg"
+            android:textSize="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:inputType="number"
+            android:paddingLeft="@dimen/dp_10"
+            android:layout_gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/loginRegister_phone"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/loginregister_sendcode"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:text="@string/getsmscode"
+            android:textSize="@dimen/dp_12"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
+            android:paddingLeft="@dimen/dp_4"
+            android:onClick="onClick"
+            android:paddingRight="@dimen/dp_8"
+            android:textColor="@color/text_color_F32727"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/loginregister_countdown_lay"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="重新发送"
+                android:textSize="@dimen/dp_12"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <cn.iwgang.countdownview.CountdownView
+            android:visibility="visible"
+            android:layout_marginLeft="@dimen/dp_0"
+            android:paddingLeft="@dimen/dp_3"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/loginregister_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:isHideTimeBackground="true"
+            app:isShowDay="false"
+            app:isShowHour="false"
+            app:isShowMinute="false"
+            app:isShowSecond="true"
+            app:isShowMillisecond="false"
+            app:timeTextColor="#000000"
+            app:timeTextSize="@dimen/dp_12"
+            app:isTimeTextBold="true"
+            app:suffixGravity="bottom"
+            app:suffixTextColor="#000000"
+            app:suffixTextSize="@dimen/dp_12"
+            app:suffix=""
+            app:suffixHour="时"
+            app:suffixMinute="分"
+            app:suffixSecond="秒"
+            app:suffixMillisecond="毫秒" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="@dimen/dp_2"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/loginregister_validatecode_lay"
+        app:layout_constraintTop_toBottomOf="@id/loginregister_smscode_lay"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_bg"
+        android:layout_height="wrap_content">
+        <EditText
+            android:background="@drawable/shape_editetext_bg"
+            android:id="@+id/loginregister_validatecode"
+            android:layout_width="0dp"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingBottom="@dimen/dp_12"
+            android:paddingLeft="@dimen/dp_10"
+            android:textSize="@dimen/dp_15"
+            android:hint="@string/inputpicturecode"
+            android:textColor="@color/text_color_2B3041"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/loginregister_validatecode_picture"
+            android:layout_width="@dimen/dp_70"
+            android:onClick="onClick"
+            android:layout_height="@dimen/dp_40" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="@dimen/dp_1"
+        android:onClick="onClick"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_30"
+        app:layout_constraintTop_toBottomOf="@id/loginregister_validatecode_lay"
+        android:background="@drawable/shape_bg"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/loginregister_login"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@string/login"
+            android:textSize="@dimen/dp_15"
+            android:background="#ff9c61"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+    <!--</layout>-->
+
+    <com.cunyn.android.financesystem.widget.ProgressWidget
+        android:layout_width="match_parent"
+        android:id="@+id/loginregister_progress"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

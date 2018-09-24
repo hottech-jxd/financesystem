@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/index_container"
+    android:background="@color/bgcolor"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.IndexFragment">
+
+    <include android:id="@+id/index_header"
+        android:layout_width="match_parent"
+        layout="@layout/layout_header"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_below="@id/index_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <com.youth.banner.Banner
+        android:background="@color/white"
+        android:id="@+id/index_banner"
+        app:delay_time="3000"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"/>
+
+    <LinearLayout
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:background="@color/white"
+        android:id="@+id/index_menu"
+        android:layout_below="@id/index_banner"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/index_menu1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:background="@color/white"
+            android:src="@mipmap/menu1"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View android:layout_width="@dimen/dp_1"
+            android:background="@color/line_color"
+            android:layout_height="@dimen/dp_50" />
+
+    <LinearLayout
+        android:id="@+id/index_menu2"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@mipmap/menu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+        <View android:layout_width="@dimen/dp_1"
+            android:background="@color/line_color"
+            android:layout_height="@dimen/dp_50" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:id="@+id/index_menu3"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@mipmap/menu3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/index_apply_lay"
+        android:layout_below="@id/index_menu"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_20"
+        android:paddingBottom="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_40"
+        android:paddingRight="@dimen/dp_40"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@drawable/style_apply_bg"
+            android:id="@+id/index_apply"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_15"
+            android:text="申请借款"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/index_lay_2"
+        android:layout_below="@id/index_apply_lay"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/dp_16"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/index_lay_2_1"
+            android:text="额度高"
+            android:layout_toLeftOf="@id/index_lay_2_3"
+            android:textSize="@dimen/dp_20"
+            android:textColor="@color/text_color_2B3041"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_toLeftOf="@id/index_lay_2_3"
+            android:layout_below="@id/index_lay_2_1"
+            android:textColor="@color/text_color_A9AAAA"
+            android:textSize="@dimen/dp_12"
+            android:text="信贷额度亦即贷款限额，信贷额度的有效期限通常为1年。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/index_lay_2_3"
+            android:src="@mipmap/idx_icon1"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/index_lay_3"
+        android:layout_below="@id/index_lay_2"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/dp_16"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/index_lay_3_1"
+            android:src="@mipmap/idx_icon2"
+            android:layout_marginLeft="@dimen/dp_0"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/dp_6"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/index_lay_3_2"
+            android:layout_toRightOf="@id/index_lay_3_1"
+            android:text="利率低"
+            android:textSize="@dimen/dp_20"
+            android:textColor="@color/text_color_2B3041"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_below="@id/index_lay_3_2"
+            android:layout_toRightOf="@id/index_lay_3_1"
+            android:textColor="@color/text_color_A9AAAA"
+            android:textSize="@dimen/dp_12"
+            android:text="信贷额度亦即贷款限额，信贷额度的有效期限通常为1年。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:id="@+id/index_lay_4"
+        android:layout_below="@id/index_lay_3"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="@dimen/dp_16"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/index_lay_4_1"
+            android:text="放款快"
+            android:layout_toLeftOf="@id/index_lay_4_3"
+            android:textSize="@dimen/dp_20"
+            android:textColor="@color/text_color_2B3041"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_6"
+            android:layout_below="@id/index_lay_4_1"
+            android:layout_toLeftOf="@id/index_lay_4_3"
+            android:textColor="@color/text_color_A9AAAA"
+            android:textSize="@dimen/dp_12"
+            android:text="放款是指单凭借款人的信用而无须提供 抵押品的放款,闪电放款。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/index_lay_4_3"
+            android:src="@mipmap/idx_icon3"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.cunyn.android.financesystem.widget.ProgressWidget
+        android:layout_width="match_parent"
+        android:id="@+id/index_progress"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

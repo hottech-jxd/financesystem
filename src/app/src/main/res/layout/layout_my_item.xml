@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/dp_10"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/my_item_orderno"
+        android:gravity="center"
+        android:padding="@dimen/dp_8"
+        android:text="借款订单001号"
+        android:textColor="@color/text_color_A9AAAA"
+        android:textSize="@dimen/dp_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_item_time"
+        android:textSize="@dimen/dp_15"
+        android:textColor="#0176f1"
+        android:gravity="center"
+        android:text="2018-09-22"
+        app:layout_constraintRight_toLeftOf="@id/my_item_line"
+        app:layout_constraintTop_toBottomOf="@id/my_item_orderno"/>
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="申请时间"
+        android:textColor="@color/text_color_A9AAAA"
+        android:textSize="@dimen/dp_12"
+        android:id="@+id/my_item_time_label"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/my_item_time"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/my_item_line"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/my_item_line"
+        app:layout_constraintTop_toBottomOf="@id/my_item_orderno"
+        app:layout_constraintRight_toLeftOf="@id/my_item_status"
+        app:layout_constraintLeft_toRightOf="@id/my_item_time"
+        android:layout_width="@dimen/dp_1"
+        android:background="#e5e5e5"
+        android:layout_height="@dimen/dp_50" />
+
+    <TextView
+        app:layout_constraintHorizontal_weight="1"
+        android:id="@+id/my_item_status"
+        app:layout_constraintLeft_toRightOf="@id/my_item_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_item_orderno"
+        android:layout_width="0dp"
+        android:text="通过"
+        android:gravity="center"
+        android:textColor="#0176f1"
+        android:textSize="@dimen/dp_15"
+        android:layout_height="wrap_content" />
+    <TextView
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/my_item_status"
+        android:layout_marginTop="@dimen/dp_10"
+        app:layout_constraintLeft_toRightOf="@id/my_item_line"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_item_status_label"
+        android:textSize="@dimen/dp_12"
+        android:gravity="center"
+        android:textColor="@color/text_color_A9AAAA"
+        android:text="审核状态"/>
+
+</android.support.constraint.ConstraintLayout>

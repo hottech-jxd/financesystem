@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--被按压时-->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners
+                android:radius="@dimen/dp_30"/>
+            <solid
+                android:color="@color/colorPrimaryDark"/>
+        </shape>
+    </item>
+
+    <!--普通状态，这里在stroke中通过dashWidth和dashGap设置边线为虚线-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dp_30"/>
+            <solid android:color="@color/bgcolor"/>
+
+        </shape>
+    </item>
+</selector>

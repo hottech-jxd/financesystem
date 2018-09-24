@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgcolor"
+    tools:context=".fragment.MyFragment">
+
+    <include android:id="@+id/my_header"
+        android:layout_width="match_parent"
+        layout="@layout/layout_header"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/my_banner"
+        android:layout_below="@id/my_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_40"
+        android:paddingBottom="@dimen/dp_40"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:background="@mipmap/bl_top">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:id="@+id/my_avator"
+            android:src="@mipmap/bl_head"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/my_username"
+            android:text="XXXX"
+            android:textSize="@dimen/dp_15"
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_alignTop="@id/my_avator"
+            android:layout_toRightOf="@id/my_avator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/my_userid"
+            android:background="@drawable/shape_id_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_13"
+            android:text="ID:23424242424"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
+            android:layout_alignLeft="@id/my_username"
+            android:layout_toRightOf="@id/my_avator"
+            android:layout_alignBottom="@id/my_avator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:layout_below="@id/my_banner"
+        android:id="@+id/my_record"
+        android:text="借款纪录"
+        android:textColor="#333333"
+        android:textSize="@dimen/dp_15"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_below="@id/my_record"
+        android:layout_height="wrap_content"/>
+
+    <com.cunyn.android.financesystem.widget.ProgressWidget
+        android:layout_width="match_parent"
+        android:id="@+id/my_progress"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

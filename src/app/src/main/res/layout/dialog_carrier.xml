@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/xinyan_dialog_bg"
+    android:orientation="vertical">
+
+
+
+    <ImageView
+        android:id="@+id/ivclose"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:src="@mipmap/close"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:text="运营商动态配置参数"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:background="@drawable/xinyan_white_line_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/xinyan_edit_min_height"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_edtTitle"
+            android:text="@string/xinyan_username" />
+
+        <EditText
+            android:id="@+id/xinyan_username"
+            style="@style/app_edt"
+            android:cursorVisible ="true"
+            android:hint="@string/xinyan_username_input"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/user_name_clear"
+            android:layout_width="@dimen/xinyan_dp_40"
+            android:layout_height="@dimen/xinyan_dp_40"
+            android:background="@drawable/xinyan_button_delete_bg"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:background="@drawable/xinyan_white_line_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/xinyan_edit_min_height"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_edtTitle"
+            android:text="@string/xinyan_idnum" />
+
+        <EditText
+            android:id="@+id/xinyan_idnum_input"
+            style="@style/app_edt"
+            android:hint="@string/xinyan_idnum_input"
+            android:cursorVisible ="true"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/user_id_clear"
+            android:layout_width="@dimen/xinyan_dp_40"
+            android:layout_height="@dimen/xinyan_dp_40"
+            android:background="@drawable/xinyan_button_delete_bg"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:background="@drawable/xinyan_white_line_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/xinyan_edit_min_height"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_edtTitle"
+            android:text="@string/xinyan_phonenum" />
+
+        <EditText
+            android:id="@+id/xinyanphonenum"
+            style="@style/app_edt"
+            android:hint="@string/xinyan_input_phonenum"
+            android:inputType="number"
+            android:cursorVisible ="true"
+            android:maxLength="11" />
+
+        <ImageView
+            android:id="@+id/user_phonenum_clear"
+            android:layout_width="@dimen/xinyan_dp_40"
+            android:layout_height="@dimen/xinyan_dp_40"
+            android:background="@drawable/xinyan_button_delete_bg"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:background="@drawable/xinyan_white_line_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/xinyan_edit_min_height"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/app_edtTitle"
+            android:text="@string/xinyan_phoneserverpwd" />
+
+        <EditText
+            android:id="@+id/fwpwd"
+            style="@style/app_edt"
+            android:hint="@string/xinyan_inputphoneserverpwd"
+            android:cursorVisible ="true"
+        />
+
+        <ImageView
+            android:id="@+id/user_fupwd_clear"
+            android:layout_width="@dimen/xinyan_dp_40"
+            android:layout_height="@dimen/xinyan_dp_40"
+            android:background="@drawable/xinyan_button_delete_bg"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:background="@drawable/xinyan_white_line_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/xinyan_edit_min_height"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:gravity="left|center_vertical"
+            android:minWidth="70dp"
+            android:paddingLeft="@dimen/xinyan_dp_5"
+            android:paddingRight="@dimen/xinyan_dp_5"
+            android:text="@string/xinyan_phonenkefu" />
+
+        <EditText
+            android:id="@+id/kfpwd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/xinyan_inputphonenkefu"
+            android:singleLine="true"
+            android:textColor="@color/xinyan_value"
+            android:textColorHint="@color/xinyan_hint_value"
+            android:textSize="@dimen/xinyan_dp_17" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="输入框是否可编辑" />
+
+        <Switch
+            android:id="@+id/inputSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="是否显示姓名身份证号码" />
+
+        <Switch
+            android:id="@+id/idnameinputSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"/>
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/xinyan_activity_horizontal_margin"
+        android:layout_marginTop="@dimen/xinyan_dp_40"
+        android:enabled="true"
+        android:textColor="@color/white"
+        android:background="@drawable/selector_common_btn"
+        android:layout_marginBottom="7dp"
+        android:text="提交" />
+
+</LinearLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="match_parent">
+    <ProgressBar
+        android:indeterminateDrawable="@drawable/style_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!--<com.github.glomadrian.loadingballs.BallView-->
+        <!--android:layout_margin="30dp"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--app:balls="3"-->
+        <!--app:path="line"-->
+        <!--app:movement_cycle_time="3000"-->
+        <!--app:enable_size_animation="true"-->
+        <!--app:size_cycle_time="1000"-->
+        <!--app:min_ball_size="5dp"-->
+        <!--app:max_ball_size="10dp"-->
+        <!--app:ball_colors="@array/colors"-->
+        <!--android:layout_gravity="center"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/progressText"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:text="加载中..."-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+</LinearLayout>
