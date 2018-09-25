@@ -65,18 +65,23 @@ object XinYanSDKUtils {
     }
 
     private fun execuSDK(mActivity: Activity?, startParams: StartParams) {
-        XinYanSDK.getInstance().start(mActivity, startParams, object : XYBDResultCallback {
-            override fun onCallBack(xinyanCallBackData: XinyanCallBackData) {
-                openResultActivity(mActivity, xinyanCallBackData)
-                XinYanData.titleConfig.setmTitle("")//这里是为了下次做任务不带之前设置的title，走默认的title
-            }
 
-            override fun onError(throwable: Throwable) {
-                Toast.makeText(mActivity, throwable.message, Toast.LENGTH_SHORT).show()
-                Log.i("aaa", "=======--==========" + throwable.message)
-                XinYanData.titleConfig.setmTitle("")
-            }
-        })
+        try {
+            XinYanSDK.getInstance().start(mActivity, startParams, object : XYBDResultCallback {
+                override fun onCallBack(xinyanCallBackData: XinyanCallBackData) {
+                    openResultActivity(mActivity, xinyanCallBackData)
+                    XinYanData.titleConfig.setmTitle("")//这里是为了下次做任务不带之前设置的title，走默认的title
+                }
+
+                override fun onError(throwable: Throwable) {
+                    Toast.makeText(mActivity, throwable.message, Toast.LENGTH_SHORT).show()
+                    Log.i("aaa", "=======--==========" + throwable.message)
+                    XinYanData.titleConfig.setmTitle("")
+                }
+            })
+        }catch (ex:Exception){
+            ex.printStackTrace()
+        }
     }
 
     /**

@@ -23,6 +23,7 @@ android {
             keyPassword KEYPassword
             storeFile file('../key/key.jks')
             storePassword STOREPassword
+            v2SigningEnabled false
         }
     }
 
@@ -34,11 +35,12 @@ android {
             /*新颜SDK参数:商户Id*/
             buildConfigField("String","MEMBER_ID",'"8000013189"')
             /*新颜SDK参数:运行环境：product/test */
-            buildConfigField("String","ENVIRONMENT",'"test"')
+            buildConfigField("String","ENVIRONMENT",'"product"')
 
             signingConfig signingConfigs.key
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
 
         release {
@@ -52,6 +54,7 @@ android {
             signingConfig signingConfigs.key
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
     dataBinding {
