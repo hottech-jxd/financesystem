@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.cunyn.android.financesysetm.BaseActivity
 import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.fragment.IndexFragment
@@ -19,6 +20,15 @@ import com.guoxintaiyi.android.missionwallet.base.OnFragmentEventListener
 
 class MainActivity : BaseActivity<InitContract.Presenter>(),
         InitContract.View,OnFragmentEventListener{
+
+    private val permissions = arrayOf<String>(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            , Manifest.permission.READ_EXTERNAL_STORAGE
+            , Manifest.permission.READ_PHONE_STATE
+            , Manifest.permission.READ_CONTACTS)
+
+
+
     private var REQUEST_CODE= 1200
     private var iPresenter = InitPresenter(this)
 
@@ -69,15 +79,35 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
         finish()
     }
 
+    //true 有权限  未获取
+    fun lacksPermissions(vararg permissions: String): Boolean {
+        for (permission in permissions) {
+            if (lacksPermission(permission)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    // true  未获取权限
+    private fun lacksPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
+    }
+
+    fun requestAllPermissions(vararg permissions: String) {
+        if (lacksPermissions(*permissions)) {
+            ActivityCompat.requestPermissions(this,
+                    permissions, REQUEST_CODE)
+        }
+    }
+
+    //private val permissions = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, READ_CONTACTS)//,READ_CONTACTS
+
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this , Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
 
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
 
-                return
-            }
+            requestAllPermissions(*permissions)
         }
 
         initView()
@@ -88,12 +118,26 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if( requestCode == REQUEST_CODE ){
-            if( grantResults[0] != PackageManager.PERMISSION_GRANTED){
-                toast("由于您拒绝App使用读写存储设备权限，App将无法使用")
-                finish()
-            }else{
-                initView()
+
+
+            for (i in permissions.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    //Toast.makeText(this, "" + "权限" + permissions[i] + "申请成功", Toast.LENGTH_SHORT).show()
+                } else {
+                    toast("由于您拒绝App使用权限，App将无法使用")
+                    finish()
+                    //Toast.makeText(this, "" + "权限" + permissions[i] + "申请失败", Toast.LENGTH_SHORT).show()
+                }
             }
+
+            initView()
+
+//            if( grantResults[0] != PackageManager.PERMISSION_GRANTED){
+//                toast("由于您拒绝App使用读写存储设备权限，App将无法使用")
+//                finish()
+//            }else{
+//                initView()
+//            }
         }
     }
 

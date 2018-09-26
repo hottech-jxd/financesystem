@@ -1,5 +1,6 @@
 package com.cunyn.android.financesystem.base
 
+import android.app.ActivityManager
 import android.app.Application
 import android.app.ApplicationErrorReport
 import android.content.Context
@@ -17,10 +18,37 @@ class BaseApplication : Application() {
 
         CrashHandler.instance.init(this)
 
-        XinYanSDK.getInstance().init(this)
-
+        if (isMainProcess()) {//只初始化一次
+            XinYanSDK.getInstance().init(this)
+            XinYanSDK.getInstance().isdebug = true
+        }
 
         //LocalManageUtil.setApplicationLanguage(applicationContext)
+    }
+
+    /**
+     * 包名判断是否为主进程
+     *
+     * @param
+     * @return
+     */
+    fun isMainProcess(): Boolean {
+        return applicationContext.packageName == getCurrentProcessName()
+    }
+
+    /**
+     * 获取当前进程名
+     */
+    private fun getCurrentProcessName(): String {
+        val pid = android.os.Process.myPid()
+        var processName = ""
+        val manager = applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (process in manager.runningAppProcesses) {
+            if (process.pid == pid) {
+                processName = process.processName
+            }
+        }
+        return processName
     }
 
     override fun attachBaseContext(base: Context?) {

@@ -100,7 +100,7 @@ class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.Im
                 XinYanSDKUtils.startSDK(activity!!
                         , BuildConfig.MEMBER_ID
                         , BuildConfig.TERMINAL_ID
-                        , XinYan_CHANNEL.FUNCTION_TAOBAOPAY.channelName
+                        , XinYan_CHANNEL.FUNCTION_TAOBAO.channelName
                         , orderInfo , BuildConfig.ENVIRONMENT )
 
             }
