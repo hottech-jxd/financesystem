@@ -8,7 +8,7 @@ import com.cunyn.android.financesystem.mvp.IView
 
 interface InitContract {
     interface Presenter:IPresenter{
-        fun init(customerId: Long)
+        fun init(customerId: Long, delay:Long=0)
 
 
     }

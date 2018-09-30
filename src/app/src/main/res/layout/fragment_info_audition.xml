@@ -308,6 +308,13 @@
                                 android:text="通讯录"/>
                         </LinearLayout>
 
+                        <ImageView
+                            android:id="@+id/info_contract_ok"
+                            android:layout_width="@dimen/dp_10"
+                            android:src="@null"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="@dimen/dp_10" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -343,14 +350,25 @@
                                 android:text="运营商授权"/>
                         </LinearLayout>
 
-
+                        <ImageView
+                            android:id="@+id/info_carrier_ok"
+                            android:layout_width="@dimen/dp_10"
+                            android:src="@null"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="@dimen/dp_10" />
                     </LinearLayout>
 
+
+                <LinearLayout
+                    android:id="@+id/info_taobao_lay"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/info_taobao"
                         android:drawablePadding="@dimen/dp_4"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:drawableTop="@mipmap/da_icon4"
                         android:text="淘宝授权"
                         android:textSize="@dimen/dp_12"
@@ -358,11 +376,26 @@
                         android:textColor="@color/text_color_A9AAAA"
                         android:layout_height="wrap_content" />
 
+                    <ImageView
+                        android:id="@+id/info_taobao_ok"
+                        android:layout_width="@dimen/dp_10"
+                        android:src="@null"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="@dimen/dp_10" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info_jd_lay"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/info_jd"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:drawablePadding="@dimen/dp_4"
+                        android:layout_width="wrap_content"
+
+                        android:drawablePadding="@dimen/dp_5"
                         android:drawableTop="@mipmap/da_icon5"
                         android:text="京东授权"
                         android:singleLine="true"
@@ -370,17 +403,41 @@
                         android:textColor="@color/text_color_A9AAAA"
                         android:layout_height="wrap_content" />
 
+                    <ImageView
+                        android:id="@+id/info_jd_ok"
+                        android:layout_width="@dimen/dp_10"
+                        android:src="@null"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="@dimen/dp_10" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info_gjj_lay"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
                     <TextView
                         android:drawablePadding="@dimen/dp_4"
-                        android:layout_weight="1"
                         android:id="@+id/info_gjj"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:singleLine="true"
                         android:drawableTop="@mipmap/da_icon7"
                         android:text="公积金授权"
+                        android:layout_gravity="center_horizontal"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/text_color_A9AAAA"
                         android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/info_gjj_ok"
+                        android:layout_width="@dimen/dp_10"
+                        android:src="@null"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="@dimen/dp_10" />
+
+                </LinearLayout>
 
                 </LinearLayout>
 

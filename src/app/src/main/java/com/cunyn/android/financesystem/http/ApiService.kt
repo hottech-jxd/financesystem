@@ -14,67 +14,70 @@ interface ApiService {
      */
     @POST("getloginuidata")
     @FormUrlEncoded
-    fun getLoginUIData(@Field("CustomerId") CustomerId:Long=0)
+    fun getLoginUIData(@Field("CustomerId") CustomerId: Long = 0)
             : Observable<ApiResult<LoginUIBean>>
 
     /**
      * 短信发送接口
      * UserMobile       是          手机号
      * SafeCode         否          图文校验码，连续发送2次以上必传
-    * CustomerId        是         商户号
+     * CustomerId        是         商户号
      */
     @POST("sendcode")
     @FormUrlEncoded
     fun sendSmsCode(@Field("UserMobile") UserMobile: String
-              , @Field("SafeCode") SafeCode: String?
-              , @Field("CustomerId") CustomerId: Long): Observable<ApiResult<String?>>
+                    , @Field("SafeCode") SafeCode: String?
+                    , @Field("CustomerId") CustomerId: Long): Observable<ApiResult<String?>>
 
     /**
      * 用户登录接口
      */
     @POST("login")
     @FormUrlEncoded
-    fun Login(@Field("UserMobile") UserMobile:String,
-              @Field("VerifyCode") VerifyCode:String,
-              @Field("CustomerId") CustomerId:Long):Observable<ApiResult<UserBean>>
+    fun Login(@Field("UserMobile") UserMobile: String,
+              @Field("VerifyCode") VerifyCode: String,
+              @Field("CustomerId") CustomerId: Long): Observable<ApiResult<UserBean>>
 
     /**
      * 图文验证码接口
      *
      */
     @GET("getpicturecode")
-    fun getPictureValidateCode():Observable<ApiResult<String>>
+    fun getPictureValidateCode(): Observable<ApiResult<String>>
 
     /**
      * APP首页广告接口
      *
      */
     @GET("getindexuidata")
-    fun getIndexUIData(@Query("CustomerId") CustomerId:Long)
-        :Observable<ApiResult<ArrayList<IndexUIBean>>>
+    fun getIndexUIData(@Query("CustomerId") CustomerId: Long)
+            : Observable<ApiResult<ArrayList<IndexUIBean>>>
 
     /**
      * 用户申请借款接口
      */
-    @POST("")
-    fun userApply(@Field("UserId") UserId:Long , @Field("CustomeId") CustomeId:Long)
-    :Observable<ApiResult<Any>>
+    @POST("userapply")
+    @FormUrlEncoded
+    fun userApply(@Field("UserId") UserId: Long
+                  , @Field("CustomeId") CustomeId: Long)
+            : Observable<ApiResult<Any?>>
 
     /**
      * APP常见问题与投诉接口
      */
     @POST("getfaqdata")
     @FormUrlEncoded
-    fun getFaqData(@Field("CustomerId")CustomerId:Long)
-    :Observable<ApiResult<FeedbackBean>>
+    fun getFaqData(@Field("CustomerId") CustomerId: Long)
+            : Observable<ApiResult<FeedbackBean>>
 
     /**
      * 交易记录接口
      */
-    @POST("")
+    @POST("gettraderecords")
     @FormUrlEncoded
-    fun getTradeRecord(@Field("UserId") UserId:Long , @Field("CustomerId") CustomerId:Long)
-    :Observable<ApiResult<ArrayList<TradeRecordBean>>>
+    fun getTradeRecord(@Field("UserId") UserId: Long
+                       , @Field("CustomerId") CustomerId: Long)
+            : Observable<ApiResult<ArrayList<TradeRecordBean>?>>
 
     /**
      * 通讯录接口
@@ -82,11 +85,12 @@ interface ApiService {
      * CustomerId:
      * MailList:通讯录（序列化的json数据）
      */
-    @POST("")
+    @POST("uploadcontracts")
     @FormUrlEncoded
-    fun uploadConstract(@Field("UserId") UserId:Long , @Field("CustomerId") CustomerId:Long,
-                        @Field("MailList") MailList:String)
-    :Observable<ApiResult<String>>
+    fun uploadConstract(@Field("UserId") UserId: Long
+                        , @Field("CustomerId") CustomerId: Long,
+                        @Field("MailList") MailList: String?)
+            : Observable<ApiResult<Any?>>
 
     /**
      * 数据爬虫接口
@@ -96,6 +100,21 @@ interface ApiService {
      */
     @POST("")
     @FormUrlEncoded
-    fun ReptileType(@Field("ReptileType") ReptileType:Int,@Field("CustomerId")CustomerId:Long)
-    :Observable<ApiResult<Long>>
+    fun ReptileType(@Field("ReptileType") ReptileType: Int
+                    , @Field("CustomerId") CustomerId: Long)
+            : Observable<ApiResult<Long>>
+
+    /**
+     * 四要素认证接口（对照接口文档调整）
+     */
+    @POST("info")
+    @FormUrlEncoded
+    fun submitInfo(
+            @Field("RealName") RealName: String,
+            @Field("IdCardNo") IdCardNo :String,
+            @Field("UserMobile") UserMobile :String,
+            @Field("BankNo") BankNo: String)
+            : Observable<ApiResult<Any?>>
+
+
 }

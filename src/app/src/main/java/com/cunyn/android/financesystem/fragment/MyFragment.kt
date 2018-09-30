@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 
 import com.cunyn.android.financesystem.R
-import com.cunyn.android.financesystem.bean.Variable
+import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.mvp.IPresenter
+import com.cunyn.android.financesystem.mvp.MyPresenter
 import com.cunyn.android.financesystem.widget.RecyclerViewDividerOneLine
 import com.guoxintaiyi.android.missionwallet.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_myfragment.*
@@ -30,13 +29,15 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class MyFragment : BaseFragment<IPresenter>(),
+class MyFragment : BaseFragment<MyContract.Presenter>(),
+        MyContract.View,
 BaseQuickAdapter.RequestLoadMoreListener{
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var datas = ArrayList<String>()
+    private var datas = ArrayList<TradeRecordBean>()
     private var myAdapter:MyAdapter?=null
+    var iPresenter=MyPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,15 @@ BaseQuickAdapter.RequestLoadMoreListener{
         }
     }
 
+    override fun showProgress(msg: String) {
+        super.showProgress(msg)
+        my_progress.visibility = View.VISIBLE
+    }
 
+    override fun hideProgress() {
+        super.hideProgress()
+        my_progress.visibility=View.GONE
+    }
 
     override fun initView() {
         header_title.text="我的借款"
@@ -56,11 +65,11 @@ BaseQuickAdapter.RequestLoadMoreListener{
         my_username.text = Variable.UserBean!!.UserName
         my_userid.text = "ID:${Variable.UserBean!!.UserId}"
 
-        datas.add("a")
-        datas.add("b")
-        datas.add("c")
-        datas.add("c")
-        datas.add("c")
+//        datas.add("a")
+//        datas.add("b")
+//        datas.add("c")
+//        datas.add("c")
+//        datas.add("c")
         myAdapter= MyAdapter(datas)
         my_recyclerview.adapter = myAdapter
         my_recyclerview.layoutManager=LinearLayoutManager(context!!)
@@ -68,11 +77,22 @@ BaseQuickAdapter.RequestLoadMoreListener{
                 ,ContextCompat.getColor(context!!,R.color.line_color)
                 ,1f,0f,0f))
 
-        myAdapter!!.setOnLoadMoreListener(this, my_recyclerview)
+        //myAdapter!!.setOnLoadMoreListener(this, my_recyclerview)
+
+        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId)
     }
 
     override fun fetchData() {
 
+    }
+
+    override fun onClick(v: View?) {
+        super.onClick(v)
+        when(v!!.id){
+            R.id.header_left_image->{
+                closeFragment()
+            }
+        }
     }
 
     override fun getLayoutResourceId(): Int {
@@ -85,6 +105,18 @@ BaseQuickAdapter.RequestLoadMoreListener{
 
     override fun onLoadMoreRequested() {
 
+    }
+
+    override fun getApplyRecordsCallback(apiResult: ApiResult<ArrayList<TradeRecordBean>?>) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+        if(apiResult.result==null){
+            return
+        }
+
+        myAdapter!!.setNewData(apiResult.result)
     }
 
     companion object {
@@ -109,9 +141,12 @@ BaseQuickAdapter.RequestLoadMoreListener{
 }
 
 
-class MyAdapter(data : ArrayList<String>) : BaseQuickAdapter<String, BaseViewHolder>(R.layout.layout_my_item, data){
+class MyAdapter(data : ArrayList<TradeRecordBean>)
+    : BaseQuickAdapter<TradeRecordBean, BaseViewHolder>(R.layout.layout_my_item, data){
 
-    override fun convert(helper: BaseViewHolder?, item: String?) {
+    override fun convert(helper: BaseViewHolder?, item: TradeRecordBean?) {
 
+            helper!!.setText(R.id.my_item_time , item!!.ApplyTime)
+        helper.setText(R.id.my_item_status , item.ApplyStatusStr)
     }
 }

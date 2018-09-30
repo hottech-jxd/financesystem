@@ -5,17 +5,19 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.cunyn.android.financesysetm.widget.TipAlertDialog
 import com.cunyn.android.financesystem.BuildConfig
 
 import com.cunyn.android.financesystem.R
-import com.cunyn.android.financesystem.bean.Constants
-import com.cunyn.android.financesystem.bean.Variable
-import com.cunyn.android.financesystem.bean.XinYanData
-import com.cunyn.android.financesystem.bean.XinYan_CHANNEL
+import com.cunyn.android.financesystem.bean.*
+import com.cunyn.android.financesystem.mvp.AuditionPresenter
 import com.cunyn.android.financesystem.mvp.IPresenter
+import com.cunyn.android.financesystem.util.KeybordUtils
+import com.cunyn.android.financesystem.util.MobileUtils
 import com.cunyn.android.financesystem.util.XinYanSDKUtils
 import com.cunyn.android.financesystem.widget.CarrierDialog
 import com.cunyn.android.financesysten.util.DensityUtils
@@ -38,12 +40,15 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.ImageCallback{
+class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
+        ,AuditionContract.View
+        ,FrescoDraweeListener.ImageCallback{
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var isAgree :Boolean=false
     private var orderInfo :String=""
+    private var iPresenter = AuditionPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +69,7 @@ class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.Im
         info_jd.setOnClickListener(this)
         info_gjj.setOnClickListener(this)
         info_agree.setOnClickListener(this)
+        info_submit.setOnClickListener(this)
 
         var width = DensityUtils.getScreenWidth(context!!)
         var height = resources.getDimension(R.dimen.dp_150).toInt()
@@ -91,7 +97,7 @@ class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.Im
                 closeFragment()
             }
             R.id.info_contract_lay->{
-                toast("todo")
+               contract()
             }
             R.id.info_carrier_lay->{
                 carrier()
@@ -124,8 +130,72 @@ class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.Im
                 draw!!.setBounds(0,0,draw!!.intrinsicWidth,draw!!.intrinsicHeight)
                 info_agree.setCompoundDrawables(draw,null,null,null)
             }
+            R.id.info_submit->{
+                submit()
+            }
         }
     }
+
+
+
+    private fun submit(){
+        if(!isAgree){
+            toast("请勾选")
+            return
+        }
+
+        var realname= info_name.text.trim().toString()
+        var idcard = info_idcard.text.trim().toString()
+        var bankno =info_bank.text.trim().toString()
+        var mobiel = Variable.UserBean!!.UserName
+
+        if(TextUtils.isEmpty(realname)){
+            info_name.requestFocus()
+            KeybordUtils.openKeybord(context!!,info_name)
+            toast("请输入姓名")
+            return
+        }
+        if(TextUtils.isEmpty(idcard)){
+            info_idcard.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_idcard)
+            toast("请输入身份证号码")
+            return
+        }
+        if(TextUtils.isEmpty(bankno)){
+            info_bank.requestFocus()
+            KeybordUtils.openKeybord(context!!,info_bank)
+            toast("请输入银行卡号")
+            return
+        }
+
+        iPresenter.submit(realname , idcard , mobiel!! , bankno)
+    }
+
+    private fun contract(){
+        var tipAlertDialog = TipAlertDialog(context!!,false)
+
+        tipAlertDialog.show("询问"
+                ,"是否允许App获得通讯录数据？"
+                , R.color.text_color_2B3041 , true, true
+                , object: View.OnClickListener{
+                    override fun onClick(v: View?) {
+                        tipAlertDialog.dismiss()
+                    }
+        }
+        , object :View.OnClickListener {
+            override fun onClick(v: View?) {
+                tipAlertDialog.dismiss()
+
+                iPresenter.uploadContracts(Constants.CUSTOMERID,
+                        Variable.UserBean!!.UserId  )
+
+            }
+        }
+        )
+
+    }
+
+    //private fun getContract(){}
 
     private fun carrier(){
         val mFragmentManager = activity!!.supportFragmentManager
@@ -157,6 +227,25 @@ class InfoAuditionFragment : BaseFragment<IPresenter>() ,FrescoDraweeListener.Im
     override fun imageCallback(width: Int, height: Int, simpleDraweeView: SimpleDraweeView) {
         simpleDraweeView.layoutParams.width = width
         simpleDraweeView.layoutParams.height =height
+    }
+
+    override fun uploadContractsCallback(apiResult: ApiResult<Any?>) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+        toast(apiResult.message)
+    }
+
+    override fun submitCallback(apiResult: ApiResult<Any?>) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+        if(activity!=null) {
+            KeybordUtils.closeKeyboard(activity!!)
+        }
+        closeFragment()
     }
 
     companion object {

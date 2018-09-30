@@ -49,6 +49,7 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
 
     private var delay = 60 * 1000L
     private var viewModel = LoginPresenter(this)
+    private var isAgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +86,8 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
         loginregister_login.setOnClickListener(this)
         loginregister_sendcode.setOnClickListener(this)
         loginregister_countdown.setOnCountdownEndListener(this)
+        loginregister_protocal.setOnClickListener(this)
+        loginregister_protocal_text.setOnClickListener(this)
 
         //dataBind = DataBindingUtil.bind(rootView!!)!!
 
@@ -131,10 +134,20 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             R.id.loginregister_validatecode_picture->{
                 viewModel.getPictureCode()
             }
+            R.id.loginregister_protocal->{
+                isAgress =!isAgress
+                loginregister_protocal.setImageResource( if(isAgress) R.mipmap.da_gou else R.mipmap.da_bugou)
+            }
+            R.id.loginregister_protocal_text->{
+                seeProtocal()
+            }
         }
     }
 
 
+    private fun seeProtocal(){
+        toast("totoddddd")
+    }
 
     private fun login(){
         var phone = loginRegister_phone.text.toString().trim()

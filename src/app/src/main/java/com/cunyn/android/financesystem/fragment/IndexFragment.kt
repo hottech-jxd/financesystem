@@ -10,10 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.cunyn.android.financesystem.R
-import com.cunyn.android.financesystem.bean.ApiResult
-import com.cunyn.android.financesystem.bean.ApiResultCodeEnum
-import com.cunyn.android.financesystem.bean.Constants
-import com.cunyn.android.financesystem.bean.IndexUIBean
+import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.mvp.IPresenter
 import com.cunyn.android.financesystem.mvp.IndexPresenter
 import com.cunyn.android.financesysten.util.DensityUtils
@@ -78,6 +75,7 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
         index_menu2.setOnClickListener(this)
         index_menu3.setOnClickListener(this)
         index_banner.setOnClickListener(this)
+        index_apply.setOnClickListener(this)
 
         iPresenter.getIndexUIData(Constants.CUSTOMERID)
 
@@ -162,6 +160,9 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
                         .addToBackStack(null)
                         .commit()
             }
+            R.id.index_apply->{
+                iPresenter.apply(Variable.UserBean!!.UserId , Constants.CUSTOMERID)
+            }
         }
     }
 
@@ -175,6 +176,15 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
 
     override fun onClsoeActivity() {
 
+    }
+
+    override fun applyCallback(apiResult: ApiResult<Any?>) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+
+        toast(apiResult.message)
     }
 
     companion object {

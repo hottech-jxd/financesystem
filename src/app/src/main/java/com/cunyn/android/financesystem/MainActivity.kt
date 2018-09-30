@@ -38,23 +38,11 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
 
         checkPermission()
 
-        //initView()
     }
 
 
     private fun initView(){
-
-        iPresenter.init(Constants.CUSTOMERID)
-
-
-//        var loginRegisterFragment = LoginRegisterFragment.newInstance("","")
-//        loginRegisterFragment.closeListener=this
-//
-//        supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.main_container , loginRegisterFragment)
-//                .commit()
-
+        checkLogin()
     }
 
     override fun onOpen( type :Int ) {
@@ -101,11 +89,9 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
         }
     }
 
-    //private val permissions = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, READ_CONTACTS)//,READ_CONTACTS
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
 
             requestAllPermissions(*permissions)
         }
@@ -143,11 +129,16 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
 
     override fun initCallback(apiResult: ApiResult<Any>) {
 
-        if(apiResult.code !=ApiResultCodeEnum.SUCCESS.code){
-            toast( apiResult.message)
-            return
-        }
+//        if(apiResult.code !=ApiResultCodeEnum.SUCCESS.code){
+//            toast( apiResult.message)
+//            return
+//        }
 
+
+    }
+
+
+    private fun checkLogin(){
         if(Variable.UserBean==null) {
 
             var loginRegisterFragment = LoginRegisterFragment.newInstance("", "")

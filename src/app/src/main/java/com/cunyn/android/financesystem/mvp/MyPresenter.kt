@@ -8,39 +8,26 @@ import com.cunyn.android.financesystem.wrapper
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
-class IndexPresenter(var view :IndexContract.View) : IndexContract.Presenter {
+class MyPresenter(var view :MyContract.View) : MyContract.Presenter {
 
     private var model=ApiModel()
 
 
-    override fun getIndexUIData(customerId: Long) {
-        model.getIndexUIData(customerId)
+    override fun getApplyRecords(customerId: Long, userId: Long) {
+                model.getApplyRecords(customerId , userId)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }
                 .doOnError { view.hideProgress()
                 it.printStackTrace()}
                 .doAfterNext {
-                    view.getIndexUIDataCallback(it)
+                    view.getApplyRecordsCallback(it)
                 }
                 .bindLifeCycle(view as LifecycleOwner)
                 .subscribe({},{view.error()})
     }
 
-    override fun apply(userId: Long , customerId: Long) {
-        model.apply(userId , customerId)
-                .wrapper()
-                .doOnSubscribe { view.showProgress() }
-                .doAfterTerminate { view.hideProgress() }
-                .doOnError {
-                    view.hideProgress()
-                    it.printStackTrace()
-                it.printStackTrace()}
-                .doAfterNext {
-                    view.applyCallback(it)
-                }.bindLifeCycle(view as LifecycleOwner)
-                .subscribe({},{view.error()})
-    }
+
 
     override fun onDestory() {
 

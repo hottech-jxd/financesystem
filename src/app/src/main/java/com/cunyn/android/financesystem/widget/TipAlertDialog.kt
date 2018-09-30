@@ -2,6 +2,7 @@ package com.cunyn.android.financesysetm.widget
 
 import android.app.AlertDialog
 import android.content.Context
+import android.support.annotation.ColorRes
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -43,16 +44,16 @@ class TipAlertDialog(context: Context, openByBrowser: Boolean) : View.OnClickLis
     }
 
     fun show(title: String, message: String, cancelListener: View.OnClickListener, confirmListener: View.OnClickListener) {
-        show(title, message, "", R.color.text_color_2B3041, true, true, cancelListener, confirmListener)
+        show(title, message, R.color.text_color_2B3041, true, true, cancelListener, confirmListener)
     }
 
-    @JvmOverloads
-    fun show(title: String, message: String, url: String, titleColor: Int = R.color.text_color_2B3041,
+    //@JvmOverloads
+    fun show(title: String, message: String,  titleColor: Int = R.color.text_color_2B3041,
              isShowLeft: Boolean = true, isShowRight: Boolean = true, cancelListener: View.OnClickListener? = null, confirmListener: View.OnClickListener? = null) {
         titleText.text = title
         titleText.setTextColor(titleColor)
         messageText.text = message
-        btn_right.tag = url
+        //btn_right.tag = url
         btn_left.visibility = if (isShowLeft) View.VISIBLE else View.GONE
         btn_right.visibility = if (isShowRight) View.VISIBLE else View.GONE
 
