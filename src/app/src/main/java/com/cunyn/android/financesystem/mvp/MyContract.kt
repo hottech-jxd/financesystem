@@ -5,7 +5,7 @@ import com.cunyn.android.financesystem.mvp.IView
 
 interface MyContract {
     interface Presenter:IPresenter{
-        fun getApplyRecords(customerId: Long, userId:Long)
+        fun getApplyRecords(customerId: Long, userId:Long, page:Int , size:Int)
 
 
     }

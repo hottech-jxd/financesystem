@@ -22,7 +22,11 @@ internal class ContractUtils(var context: Context) {
             phoneDtos.add(phoneDto)
         }
         cursor.close()
+
+
+
         return phoneDtos
     }
+
 
 }

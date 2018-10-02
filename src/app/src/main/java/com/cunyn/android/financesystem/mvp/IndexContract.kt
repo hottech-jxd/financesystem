@@ -15,7 +15,7 @@ interface IndexContract {
     }
 
     interface View:IView<Presenter>{
-        fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>>)
+        fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>?>)
         fun applyCallback(apiResult: ApiResult<Any?>)
     }
 }

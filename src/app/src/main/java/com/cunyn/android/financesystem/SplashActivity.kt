@@ -13,6 +13,9 @@ class SplashActivity : BaseActivity<InitContract.Presenter>()
     private var iPresenter = InitPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        isPORTRAIT=false
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 

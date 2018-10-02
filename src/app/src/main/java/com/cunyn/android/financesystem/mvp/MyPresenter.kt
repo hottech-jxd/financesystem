@@ -13,8 +13,8 @@ class MyPresenter(var view :MyContract.View) : MyContract.Presenter {
     private var model=ApiModel()
 
 
-    override fun getApplyRecords(customerId: Long, userId: Long) {
-                model.getApplyRecords(customerId , userId)
+    override fun getApplyRecords(customerId: Long, userId: Long, page:Int , size:Int) {
+                model.getApplyRecords(customerId , userId ,page,size )
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }

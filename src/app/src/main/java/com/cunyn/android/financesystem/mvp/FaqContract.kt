@@ -11,7 +11,7 @@ interface FaqContract {
     }
 
     interface View:IView<Presenter>{
-        fun getFagDataCallback(apiResult: ApiResult<FeedbackBean>)
+        fun getFagDataCallback(apiResult: ApiResult<FeedbackBean?>)
 
     }
 }

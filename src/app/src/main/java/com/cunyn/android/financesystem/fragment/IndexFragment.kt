@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.cunyn.android.financesystem.R
+import com.cunyn.android.financesystem.WebActivity
 import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.mvp.IPresenter
 import com.cunyn.android.financesystem.mvp.IndexPresenter
+import com.cunyn.android.financesystem.newIntent
 import com.cunyn.android.financesysten.util.DensityUtils
 import com.facebook.drawee.view.SimpleDraweeView
 import com.guoxintaiyi.android.missionwallet.base.BaseFragment
@@ -21,6 +23,7 @@ import com.guoxintaiyi.android.missionwallet.util.FrescoDraweeController
 import com.guoxintaiyi.android.missionwallet.util.FrescoDraweeListener
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
+import com.youth.banner.listener.OnBannerListener
 import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_index.*
 import kotlinx.android.synthetic.main.layout_header.*
@@ -37,6 +40,7 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class IndexFragment : BaseFragment<IndexContract.Presenter>()
+        ,OnBannerListener
         ,OnFragmentEventListener
 ,IndexContract.View{
     // TODO: Rename and change types of parameters
@@ -44,6 +48,7 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
     private var param2: String? = null
     private var iPresenter = IndexPresenter(this)
     private var bannerImages =ArrayList<String>()
+    private var bannerDatas = ArrayList<IndexUIBean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +85,12 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
         iPresenter.getIndexUIData(Constants.CUSTOMERID)
 
         //index_banner.setImageLoader(FrescoImageLoader(index_banner))
+        index_banner.setOnBannerListener(this)
+    }
+
+    override fun OnBannerClick(position: Int) {
+        var url = bannerDatas[position].AdLinkURL
+        newIntent<WebActivity>(Constants.INTENT_URL , url)
     }
 
     override fun fetchData() {
@@ -93,18 +104,18 @@ class IndexFragment : BaseFragment<IndexContract.Presenter>()
         return false
     }
 
-    override fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>>) {
+    override fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>?>) {
         if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
             toast(apiResult.message)
             return
         }
-        if(apiResult.result==null || apiResult.result!!.size<1)return
+        if(apiResult.data==null || apiResult.data!!.size<1)return
 
         bannerImages.clear()
-        for(bean in apiResult.result!!) {
+        bannerDatas = apiResult.data!!
+        for(bean in apiResult.data!!) {
             bannerImages.add(bean.AdImgSrc!!)
         }
-
 
 
         if(bannerImages.size>1){

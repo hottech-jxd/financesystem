@@ -482,5 +482,10 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <com.cunyn.android.financesystem.widget.ProgressWidget
+        android:layout_width="match_parent"
+        android:id="@+id/info_progress"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

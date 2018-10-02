@@ -20,7 +20,7 @@ class AuditionPresenter(var view:AuditionContract.View)
 
 
 
-    override fun uploadContracts(customerId: Long, userId: Long) {
+    override fun uploadContracts(customerId: Long, userMobile: String ) {
 
         Observable.create( object : ObservableOnSubscribe<ApiResult<String?>> {
 
@@ -34,7 +34,7 @@ class AuditionPresenter(var view:AuditionContract.View)
                 var apiResult = ApiResult<String?>()
                 apiResult.code = ApiResultCodeEnum.SUCCESS.code
                 apiResult.message=""
-                apiResult.result =json
+                apiResult.data =json
 
                 emitter.onNext( apiResult )
                 emitter.onComplete()
@@ -42,7 +42,7 @@ class AuditionPresenter(var view:AuditionContract.View)
                  .doAfterTerminate { view.hideProgress() }
                 .doOnSubscribe { view.showProgress() }
                 .doAfterNext {
-                    this.upload( userId , customerId , it.result )
+                    this.upload( userMobile , customerId , it.data )
                 }
                 .doOnError { view.hideProgress()
                     it.printStackTrace() }
@@ -52,8 +52,8 @@ class AuditionPresenter(var view:AuditionContract.View)
 
     }
 
-    private fun upload(userId: Long,customerId: Long, json:String?){
-        model.uploadContracts(userId,customerId,json)
+    private fun upload(userMobile : String,customerId: Long, json:String?){
+        model.uploadContracts(userMobile,customerId,json)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }
@@ -72,6 +72,18 @@ class AuditionPresenter(var view:AuditionContract.View)
                 .doAfterNext { view.submitCallback(it) }
                 .bindLifeCycle( view as LifecycleOwner)
                 .subscribe({}, {view.error()})
+    }
+
+    override fun createPreOrder(txnType: String , customerId: Long) {
+        model.createPreOrder(txnType , customerId)
+                .wrapper()
+                .doOnSubscribe { view.showProgress() }
+                .doAfterTerminate { view.hideProgress() }
+                .doOnError { view.hideProgress()
+                    it.printStackTrace()
+                }.doAfterNext { view.createPreOrderCallback(it , txnType) }
+                .bindLifeCycle(view as LifecycleOwner)
+                .subscribe({},{view.error()})
     }
 
     override fun onDestory() {

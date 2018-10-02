@@ -47,7 +47,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
     private var param1: String? = null
     private var param2: String? = null
     private var isAgree :Boolean=false
-    private var orderInfo :String=""
+    //private var orderInfo :String=""
     private var iPresenter = AuditionPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +76,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
         var url = "res://"+ context!!.packageName +"/"+R.mipmap.dabg
         FrescoDraweeController.loadImage(info_banner, width,height , url , this )
 
-        orderInfo = Variable.UserBean!!.UserId.toString()
+        //orderInfo = Variable.UserBean!!.UserId.toString()
     }
 
     override fun fetchData() {
@@ -100,28 +100,32 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
                contract()
             }
             R.id.info_carrier_lay->{
-                carrier()
+                //carrier()
+                iPresenter.createPreOrder( XinYan_CHANNEL.FUNCTION_CARRIER.channelName ,Constants.CUSTOMERID)
             }
             R.id.info_taobao->{
-                XinYanSDKUtils.startSDK(activity!!
-                        , BuildConfig.MEMBER_ID
-                        , BuildConfig.TERMINAL_ID
-                        , XinYan_CHANNEL.FUNCTION_TAOBAO.channelName
-                        , orderInfo , BuildConfig.ENVIRONMENT )
+//                XinYanSDKUtils.startSDK(activity!!
+//                        , BuildConfig.MEMBER_ID
+//                        , BuildConfig.TERMINAL_ID
+//                        , XinYan_CHANNEL.FUNCTION_TAOBAO.channelName
+//                        , orderInfo , BuildConfig.ENVIRONMENT )
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_TAOBAO.channelName , Constants.CUSTOMERID)
 
             }
             R.id.info_jd->{
-                XinYanSDKUtils.startSDK(activity!!
-                        , BuildConfig.MEMBER_ID, BuildConfig.TERMINAL_ID
-                        , XinYan_CHANNEL.FUNCTION_JINGDONG.channelName
-                        , orderInfo, BuildConfig.ENVIRONMENT)
+//                XinYanSDKUtils.startSDK(activity!!
+//                        , BuildConfig.MEMBER_ID, BuildConfig.TERMINAL_ID
+//                        , XinYan_CHANNEL.FUNCTION_JINGDONG.channelName
+//                        , orderInfo, BuildConfig.ENVIRONMENT)
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_JINGDONG.channelName , Constants.CUSTOMERID)
 
             }
             R.id.info_gjj->{
-                XinYanSDKUtils.startSDK(activity!!
-                        , BuildConfig.MEMBER_ID , BuildConfig.TERMINAL_ID
-                        , XinYan_CHANNEL.FUNCTION_FUND.channelName
-                        , orderInfo, BuildConfig.ENVIRONMENT)
+//                XinYanSDKUtils.startSDK(activity!!
+//                        , BuildConfig.MEMBER_ID , BuildConfig.TERMINAL_ID
+//                        , XinYan_CHANNEL.FUNCTION_FUND.channelName
+//                        , orderInfo, BuildConfig.ENVIRONMENT)
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_FUND.channelName,Constants.CUSTOMERID)
 
             }
             R.id.info_agree->{
@@ -187,7 +191,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
                 tipAlertDialog.dismiss()
 
                 iPresenter.uploadContracts(Constants.CUSTOMERID,
-                        Variable.UserBean!!.UserId  )
+                        Variable.UserBean!!.UserName!!  )
 
             }
         }
@@ -197,7 +201,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 
     //private fun getContract(){}
 
-    private fun carrier(){
+    private fun carrier(orderInfo:String){
         val mFragmentManager = activity!!.supportFragmentManager
         var ft = mFragmentManager.beginTransaction()
         val prev = mFragmentManager.findFragmentByTag("carrier")
@@ -211,7 +215,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
                 XinYanSDKUtils.startSDK(activity!!
                         , BuildConfig.MEMBER_ID, BuildConfig.TERMINAL_ID
                         , XinYan_CHANNEL.FUNCTION_CARRIER.channelName
-                        , orderInfo, BuildConfig.ENVIRONMENT)
+                        , orderInfo , BuildConfig.ENVIRONMENT)
             }
         })
         fragment.isCancelable=false
@@ -246,6 +250,34 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             KeybordUtils.closeKeyboard(activity!!)
         }
         closeFragment()
+    }
+
+    override fun createPreOrderCallback(apiResult: ApiResult<PreOrderBean?> , txType:String ) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+        if(apiResult.data==null) return
+        if(activity==null)return
+
+        var orderId = apiResult.data!!.DataId!!
+
+        if(txType== XinYan_CHANNEL.FUNCTION_CARRIER.channelName ){
+            carrier(orderId)
+        }else {
+            XinYanSDKUtils.startSDK(activity!!, BuildConfig.TERMINAL_ID
+                    , BuildConfig.MEMBER_ID, txType, orderId, BuildConfig.ENVIRONMENT)
+        }
+    }
+
+    override fun showProgress(msg: String) {
+        super.showProgress(msg)
+        info_progress.visibility=View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        super.hideProgress()
+        info_progress.visibility=View.GONE
     }
 
     companion object {

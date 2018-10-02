@@ -18,7 +18,7 @@ object Constants {
     //测试地址
     //val BASE_URL:String= "http://mfapi.mifangtest.com/"
     //行情 正式地址
-    //val BASE_URL :String="http://192.168.1.27:8080/wallet_manager/"
+    //val BASE_URL :String="http://cyfp.yhunba.cn/api/XYData/"
 
     /**
      * app版本检测地址

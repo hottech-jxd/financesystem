@@ -45,8 +45,8 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
         ,FrescoDraweeListener.ImageCallback
 ,LoginContract.View{
 
-//    lateinit var dataBind:dataBindFragmentLoginRegisterBinding
 
+    private var safeKey :String?=""
     private var delay = 60 * 1000L
     private var viewModel = LoginPresenter(this)
     private var isAgress = false
@@ -88,6 +88,8 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
         loginregister_countdown.setOnCountdownEndListener(this)
         loginregister_protocal.setOnClickListener(this)
         loginregister_protocal_text.setOnClickListener(this)
+
+        loginregister_markdown_lay.setOnClickListener(this)
 
         //dataBind = DataBindingUtil.bind(rootView!!)!!
 
@@ -141,12 +143,16 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             R.id.loginregister_protocal_text->{
                 seeProtocal()
             }
+            R.id.loginregister_markdown_lay->{
+                loginregister_markdown_lay.visibility=View.GONE
+            }
         }
     }
 
 
     private fun seeProtocal(){
-        toast("totoddddd")
+        //toast("totoddddd")
+        viewModel.getRegisterContent()
     }
 
     private fun login(){
@@ -206,7 +212,7 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             return
         }
 
-        viewModel.sendCode(phone, validateCode , Constants.CUSTOMERID)
+        viewModel.sendCode(phone, validateCode , Constants.CUSTOMERID , safeKey )
     }
 
     override fun onEnd(cv: CountdownView?) {
@@ -219,17 +225,22 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             toast(apiResult.message)
             return
         }
-        if( apiResult.result==null){
+        if( apiResult.data==null){
             return
         }
 
 
-        var buttonColor= apiResult.result!!.ButtonColor
-        var bannerColor = apiResult.result!!.BannerColor
+        var buttonColor= apiResult.data!!.ButtonColor
+        var bannerColor = apiResult.data!!.BannerColor
         loginregister_login.setBackgroundColor( Color.parseColor(buttonColor) )
         loginregister_container.setBackgroundColor( Color.parseColor( bannerColor ) )
 
-        var url = apiResult.result!!.BannerURL
+        var url = apiResult.data!!.BannerURL
+
+        if( !url.toLowerCase().startsWith("http://")){
+            url = "http://$url"
+        }
+
         var width = DensityUtils.getScreenWidth(context!!)
         var height = resources.getDimension(R.dimen.dp_150).toInt()
         FrescoDraweeController
@@ -253,11 +264,11 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             toast(apiResult.message)
             return
         }
-        if(apiResult.result==null){
+        if(apiResult.data==null){
             return
         }
 
-        Variable.UserBean = apiResult.result
+        Variable.UserBean = apiResult.data
         var json = GsonUtils.toJsonString( Variable.UserBean as Any )
         SPUtils.getInstance(BaseApplication.instance!!,Constants.PREF_FILENAME)
                 .writeString( Constants.PREF_USER , json )
@@ -267,18 +278,23 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
         }
     }
 
-    override fun getPictureCodecallback(apiResult: ApiResult<String>) {
+    override fun getPictureCodecallback(apiResult: ApiResult<VerifyCodeBean?>) {
         if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
             toast(apiResult.message)
             return
         }
-        if(apiResult.result==null) return
+        if(apiResult.data==null) return
 
-        var url = apiResult.result!!
-        var width = resources.getDimension(R.dimen.dp_100).toInt()
-        var height =resources.getDimension(R.dimen.dp_30).toInt()
-        FrescoDraweeController.loadImage(
-                loginregister_validatecode_picture , width , height , url , this )
+        safeKey = apiResult.data!!.SafeKey
+
+        //var url = apiResult.data!!
+        //var width = resources.getDimension(R.dimen.dp_100).toInt()
+        //var height =resources.getDimension(R.dimen.dp_30).toInt()
+
+        loginregister_validatecode_picture.setImageBitmap( apiResult.data!!.imageBitmap )
+
+//        FrescoDraweeController.loadImage(
+//                loginregister_validatecode_picture , width , height , url , this )
 
     }
 
@@ -289,6 +305,18 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
     override fun imageCallback(width: Int, height: Int, simpleDraweeView: SimpleDraweeView) {
         simpleDraweeView.layoutParams.width=width
         simpleDraweeView.layoutParams.height = height
+    }
+
+    override fun getRegisterContentCallback(apiResult: ApiResult<ProtocalBean?>) {
+        if(apiResult.code != ApiResultCodeEnum.SUCCESS.code){
+            toast(apiResult.message)
+            return
+        }
+        if(apiResult.data==null) return
+
+        loginregister_markdown_lay.visibility=View.VISIBLE
+        loginregister_markdown.loadMarkdown( apiResult.data!!.AgreementContent )
+
     }
 
     companion object {

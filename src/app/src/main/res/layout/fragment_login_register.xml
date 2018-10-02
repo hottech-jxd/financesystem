@@ -186,12 +186,13 @@
             android:singleLine="true"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content" />
-        <com.facebook.drawee.view.SimpleDraweeView
+        <ImageView
             android:layout_gravity="center_vertical"
             android:id="@+id/loginregister_validatecode_picture"
             android:layout_width="@dimen/dp_70"
             android:onClick="onClick"
             android:layout_height="@dimen/dp_40" />
+
     </LinearLayout>
 
         <LinearLayout
@@ -256,6 +257,26 @@
 
 </android.support.v4.widget.NestedScrollView>
     <!--</layout>-->
+
+
+    <LinearLayout
+        android:id="@+id/loginregister_markdown_lay"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/loginregister_header"
+        android:orientation="vertical"
+        android:background="#66000000"
+        android:clickable="true"
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <us.feras.mdv.MarkdownView
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/dp_100"
+            android:id="@+id/loginregister_markdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <com.cunyn.android.financesystem.widget.ProgressWidget
         android:layout_width="match_parent"

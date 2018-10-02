@@ -33,6 +33,7 @@ class WebActivity : BaseActivity<IPresenter>() ,View.OnClickListener{
         url = intent.extras.getString(Constants.INTENT_URL)
 
         header_left_image.setOnClickListener(this)
+        header_left_image.setImageResource(R.mipmap.arrow_left)
 
         loadPage()
     }

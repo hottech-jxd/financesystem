@@ -148,21 +148,21 @@ class FaqFragment : BaseFragment<FaqContract.Presenter>()
         }
     }
 
-    override fun getFagDataCallback(apiResult: ApiResult<FeedbackBean>) {
+    override fun getFagDataCallback(apiResult: ApiResult<FeedbackBean?>) {
         if(apiResult.code!= ApiResultCodeEnum.SUCCESS.code){
             toast(apiResult.message)
             return
         }
-        if(apiResult.result==null) return
+        if(apiResult.data==null) return
 
-        var htmltext = apiResult.result!!.QuestionText
+        var htmltext = apiResult.data!!.QuestionText
         var encode = "utf-8"
         var mimetype =""
         faq_webview.loadMarkdown(htmltext  )
         //faq_qq.text= apiResult.result!!.CustomerQQ
         //faq_phone.text =apiResult.result!!.CustomerMobile
-        qq = apiResult.result!!.CustomerQQ
-        phone=apiResult.result!!.CustomerMobile
+        qq = apiResult.data!!.CustomerQQ
+        phone=apiResult.data!!.CustomerMobile
     }
 
     companion object {

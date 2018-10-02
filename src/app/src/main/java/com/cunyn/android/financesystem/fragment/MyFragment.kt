@@ -38,6 +38,7 @@ BaseQuickAdapter.RequestLoadMoreListener{
     private var datas = ArrayList<TradeRecordBean>()
     private var myAdapter:MyAdapter?=null
     var iPresenter=MyPresenter(this)
+    var pageIndex=-1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +78,9 @@ BaseQuickAdapter.RequestLoadMoreListener{
                 ,ContextCompat.getColor(context!!,R.color.line_color)
                 ,1f,0f,0f))
 
-        //myAdapter!!.setOnLoadMoreListener(this, my_recyclerview)
+        myAdapter!!.setOnLoadMoreListener(this, my_recyclerview)
 
-        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId)
+        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId , pageIndex , Constants.PAGE_SIZE)
     }
 
     override fun fetchData() {
@@ -104,7 +105,8 @@ BaseQuickAdapter.RequestLoadMoreListener{
     }
 
     override fun onLoadMoreRequested() {
-
+        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId
+                , pageIndex+1 ,Constants.PAGE_SIZE)
     }
 
     override fun getApplyRecordsCallback(apiResult: ApiResult<ArrayList<TradeRecordBean>?>) {
@@ -112,11 +114,33 @@ BaseQuickAdapter.RequestLoadMoreListener{
             toast(apiResult.message)
             return
         }
-        if(apiResult.result==null){
+        if(apiResult.data==null){
             return
         }
 
-        myAdapter!!.setNewData(apiResult.result)
+
+
+        if (  apiResult.data!!.size < Constants.PAGE_SIZE) {
+            //没有数据了
+            if (pageIndex == -1) {
+                myAdapter!!.loadMoreEnd(true)
+            } else {
+                myAdapter!!.loadMoreEnd()
+            }
+            pageIndex++
+
+        } else {
+            myAdapter!!.loadMoreComplete()
+            pageIndex++
+        }
+
+        if (pageIndex == 0) {
+            myAdapter!!.setNewData(apiResult.data)
+            myAdapter!!.disableLoadMoreIfNotFullPage(my_recyclerview)
+        } else {
+            myAdapter!!.addData(apiResult.data!!)
+        }
+
     }
 
     companion object {

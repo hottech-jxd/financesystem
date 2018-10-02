@@ -12,10 +12,10 @@ class ApiModel  {
         return apiService!!.getLoginUIData(customerId)
     }
 
-    fun sendSmsCode(phone:String, safeCode:String?, customerId:Long)
+    fun sendSmsCode(phone:String, safeCode:String?, customerId:Long , safeKey:String?)
             :Observable<ApiResult<String?>>{
         //val apiService = RetrofitManager.getApiService()
-        return apiService!!.sendSmsCode(phone , safeCode , customerId)
+        return apiService!!.sendSmsCode(phone , safeCode , customerId , safeKey)
     }
 
     fun login(phone: String, smsCode:String , validateCode:String? , customerId:Long)
@@ -23,17 +23,17 @@ class ApiModel  {
         return apiService!!.Login(phone, smsCode , customerId)
     }
 
-    fun getPictureCode():Observable<ApiResult<String>>{
+    fun getPictureCode():Observable<ApiResult<VerifyCodeBean?>>{
         return apiService!!.getPictureValidateCode()
     }
 
     fun getIndexUIData(customerId:Long)
-    :Observable<ApiResult<ArrayList<IndexUIBean>>>{
+    :Observable<ApiResult<ArrayList<IndexUIBean>?>>{
         return apiService!!.getIndexUIData(customerId)
     }
 
     fun getFaqData(customerId:Long)
-    :Observable<ApiResult<FeedbackBean>>{
+    :Observable<ApiResult<FeedbackBean?>>{
         return apiService!!.getFaqData(customerId)
     }
 
@@ -42,9 +42,9 @@ class ApiModel  {
         return apiService!!.userApply(userId, customerId)
     }
 
-    fun uploadContracts(userId: Long, customerId: Long, contracts:String?)
+    fun uploadContracts(userMobile: String , customerId: Long, contracts:String?)
     :Observable<ApiResult<Any?>>{
-        return apiService!!.uploadConstract(userId, customerId, contracts)
+        return apiService!!.uploadConstract(userMobile , customerId, contracts)
     }
 
     fun submitInfo(realName:String, idCard:String , bankNo:String , mobile:String)
@@ -52,9 +52,18 @@ class ApiModel  {
         return apiService!!.submitInfo(realName , idCard ,  mobile , bankNo)
     }
 
-    fun getApplyRecords(customerId: Long,userId: Long)
+    fun getApplyRecords(customerId: Long,userId: Long, page:Int,size:Int)
     :Observable<ApiResult<ArrayList<TradeRecordBean>?>>{
-        return apiService!!.getTradeRecord(userId , customerId)
+        return apiService!!.getTradeRecord(userId , customerId, page, size)
     }
 
+    fun getRegisterContent(customerId: Long)
+            :Observable<ApiResult<ProtocalBean?>>{
+        return apiService!!.getRegisterContent()
+    }
+
+    fun createPreOrder(txType:String , customerId: Long)
+        :Observable<ApiResult<PreOrderBean?>>{
+        return apiService!!.createPreOrder(txType , customerId)
+    }
 }
