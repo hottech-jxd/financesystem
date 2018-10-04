@@ -16,6 +16,7 @@ import com.cunyn.android.financesystem.R
 import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.mvp.AuditionPresenter
 import com.cunyn.android.financesystem.mvp.IPresenter
+import com.cunyn.android.financesystem.util.IDCardUtils
 import com.cunyn.android.financesystem.util.KeybordUtils
 import com.cunyn.android.financesystem.util.MobileUtils
 import com.cunyn.android.financesystem.util.XinYanSDKUtils
@@ -165,6 +166,14 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             toast("请输入身份证号码")
             return
         }
+        var validate = IDCardUtils.validate_effective(idcard)
+        if( validate != idcard){
+            info_idcard.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_idcard)
+            toast(validate)
+            return
+        }
+
         if(TextUtils.isEmpty(bankno)){
             info_bank.requestFocus()
             KeybordUtils.openKeybord(context!!,info_bank)
@@ -215,6 +224,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
                 XinYanSDKUtils.startSDK(activity!!
                         , BuildConfig.MEMBER_ID, BuildConfig.TERMINAL_ID
                         , XinYan_CHANNEL.FUNCTION_CARRIER.channelName
+                        , Variable.UserBean!!.UserId.toString()
                         , orderInfo , BuildConfig.ENVIRONMENT)
             }
         })
@@ -266,7 +276,9 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             carrier(orderId)
         }else {
             XinYanSDKUtils.startSDK(activity!!, BuildConfig.TERMINAL_ID
-                    , BuildConfig.MEMBER_ID, txType, orderId, BuildConfig.ENVIRONMENT)
+                    , BuildConfig.MEMBER_ID, txType
+                    , Variable.UserBean!!.UserId.toString()
+                    ,orderId, BuildConfig.ENVIRONMENT)
         }
     }
 

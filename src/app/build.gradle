@@ -60,9 +60,9 @@ android {
 
         }
     }
-    dataBinding {
-        enabled true
-    }
+//    dataBinding {
+//        enabled true
+//    }
 
 //    configurations.all {
 //        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.2'
@@ -84,7 +84,7 @@ dependencies {
     implementation 'com.umeng.sdk:common:latest.integration'
     implementation 'com.umeng.sdk:analytics:latest.integration'
 
-    kapt 'com.android.databinding:compiler:3.1.4'
+    //kapt 'com.android.databinding:compiler:3.1.4'
 
     implementation 'com.uber.autodispose:autodispose:0.8.0'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:0.8.0'

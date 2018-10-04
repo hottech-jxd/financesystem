@@ -31,6 +31,7 @@
         <TextView
             android:id="@+id/my_username"
             android:text="XXXX"
+            android:layout_marginBottom="@dimen/dp_2"
             android:textSize="@dimen/dp_15"
             android:textColor="@color/white"
             android:layout_marginLeft="@dimen/dp_10"
@@ -38,15 +39,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_marginTop="@dimen/dp_2"
             android:id="@+id/my_userid"
             android:background="@drawable/shape_id_bg"
             android:textColor="@color/white"
             android:textSize="@dimen/dp_13"
             android:text="ID:23424242424"
-            android:paddingTop="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_4"
             android:paddingLeft="@dimen/dp_8"
-            android:paddingRight="@dimen/dp_6"
-            android:paddingBottom="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_4"
             android:layout_alignLeft="@id/my_username"
             android:layout_toRightOf="@id/my_avator"
             android:layout_below="@id/my_username"

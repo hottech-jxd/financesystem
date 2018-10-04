@@ -102,6 +102,7 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:layout_marginLeft="@dimen/dp_16"
                 android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginBottom="@dimen/dp_20"
                 android:id="@+id/info_info_lay"
                 android:background="@drawable/shape_bg"
                 android:layout_width="match_parent"
