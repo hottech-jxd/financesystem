@@ -1,13 +1,8 @@
 package com.cunyn.android.financesystem.fragment
 
-
-import android.content.Context
-//import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.view.View
 import cn.iwgang.countdownview.CountdownView
@@ -19,7 +14,6 @@ import com.cunyn.android.financesystem.util.GsonUtils
 import com.cunyn.android.financesystem.util.KeybordUtils
 import com.cunyn.android.financesystem.util.MobileUtils
 import com.cunyn.android.financesystem.util.SPUtils
-import com.cunyn.android.financesystem.viewmodel.UserViewModel
 import com.cunyn.android.financesysten.util.DensityUtils
 import com.facebook.drawee.view.SimpleDraweeView
 import com.guoxintaiyi.android.missionwallet.base.BaseFragment
@@ -183,6 +177,10 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
             loginregister_validatecode.requestFocus()
             KeybordUtils.openKeybord(context!!,loginregister_validatecode)
             toast("请输入图文验证码")
+            return
+        }
+        if(!isAgress){
+            toast("请阅读并同意协议")
             return
         }
 

@@ -64,6 +64,8 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
         header_left_image.setImageResource(R.mipmap.arrow_left)
         header_left_image.setOnClickListener(this)
 
+        info_bank_mobile.setText( if(Variable.UserBean!=null) Variable.UserBean!!.UserName else "")
+
         info_contract_lay.setOnClickListener(this)
         info_carrier_lay.setOnClickListener(this)
         info_taobao.setOnClickListener(this)
@@ -72,12 +74,17 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
         info_agree.setOnClickListener(this)
         info_submit.setOnClickListener(this)
 
+        info_bank_type_1.setOnCheckedChangeListener { _, isChecked -> info_bank_type_2.isChecked = !isChecked }
+        info_bank_type_2.setOnCheckedChangeListener { _, isChecked -> info_bank_type_1.isChecked= !isChecked }
+
+        info_bank_validate_type_1.setOnCheckedChangeListener { _, isChecked -> info_bank_validate_type_2.isChecked=!isChecked }
+        info_bank_validate_type_2.setOnCheckedChangeListener { buttonView, isChecked -> info_bank_validate_type_1.isChecked=!isChecked  }
+
         var width = DensityUtils.getScreenWidth(context!!)
         var height = resources.getDimension(R.dimen.dp_150).toInt()
         var url = "res://"+ context!!.packageName +"/"+R.mipmap.dabg
         FrescoDraweeController.loadImage(info_banner, width,height , url , this )
 
-        //orderInfo = Variable.UserBean!!.UserId.toString()
     }
 
     override fun fetchData() {
@@ -143,45 +150,90 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 
 
 
-    private fun submit(){
-        if(!isAgree){
+    private fun submit() {
+        if (!isAgree) {
             toast("请勾选")
             return
         }
 
-        var realname= info_name.text.trim().toString()
+        var realname = info_name.text.trim().toString()
         var idcard = info_idcard.text.trim().toString()
-        var bankno =info_bank.text.trim().toString()
-        var mobiel = Variable.UserBean!!.UserName
+        var bankno = info_bank.text.trim().toString()
+        var mobiel = info_bank_mobile.text.trim().toString()// Variable.UserBean!!.UserName
+        var bankType = if (info_bank_type_1.isChecked) "101" else "102"
+        var bankYear = info_bank_year.text.trim().toString()
+        var bankMonth = info_bank_month.text.trim().toString()
+        var validateType = if (info_bank_validate_type_1.isChecked) "123" else "1234"
+        var safeCode = info_bank_safecode.text.trim().toString()
 
-        if(TextUtils.isEmpty(realname)){
+        if (TextUtils.isEmpty(realname)) {
             info_name.requestFocus()
-            KeybordUtils.openKeybord(context!!,info_name)
+            KeybordUtils.openKeybord(context!!, info_name)
             toast("请输入姓名")
             return
         }
-        if(TextUtils.isEmpty(idcard)){
+        if (TextUtils.isEmpty(idcard)) {
             info_idcard.requestFocus()
             KeybordUtils.openKeybord(context!!, info_idcard)
             toast("请输入身份证号码")
             return
         }
         var validate = IDCardUtils.validate_effective(idcard)
-        if( validate != idcard){
+        if (validate != idcard) {
             info_idcard.requestFocus()
             KeybordUtils.openKeybord(context!!, info_idcard)
             toast(validate)
             return
         }
 
-        if(TextUtils.isEmpty(bankno)){
+        if (TextUtils.isEmpty(bankno)) {
             info_bank.requestFocus()
-            KeybordUtils.openKeybord(context!!,info_bank)
+            KeybordUtils.openKeybord(context!!, info_bank)
             toast("请输入银行卡号")
             return
         }
 
-        iPresenter.submit(realname , idcard , mobiel!! , bankno)
+        if (TextUtils.isEmpty(mobiel)) {
+            info_bank_mobile.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_bank_mobile)
+            toast("请输入银行预留手机号")
+            return
+        }
+        if (MobileUtils.isPhone(mobiel)) {
+            info_bank_mobile.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_bank_mobile)
+            toast("请输入正确的手机号")
+            return
+        }
+
+        if (TextUtils.isEmpty(bankYear)) {
+            info_bank_year.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_bank_year)
+            toast("请输入卡有效期年份")
+            return
+        }
+        if (TextUtils.isEmpty(bankMonth)) {
+            info_bank_month.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_bank_month)
+            toast("请输入卡有效期月份")
+            return
+        }
+        if (TextUtils.isEmpty(safeCode)) {
+            info_bank_safecode.requestFocus()
+            KeybordUtils.openKeybord(context!!, info_bank_safecode)
+            toast("请输入信用卡安全码")
+        }
+
+
+        iPresenter.submit(realname
+                , idcard
+                , mobiel
+                , bankno,
+                bankType,
+                bankYear,
+                bankMonth,
+                safeCode,
+                validateType)
     }
 
     private fun contract(){

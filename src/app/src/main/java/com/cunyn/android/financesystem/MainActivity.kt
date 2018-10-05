@@ -86,17 +86,18 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
         if (lacksPermissions(*permissions)) {
             ActivityCompat.requestPermissions(this,
                     permissions, REQUEST_CODE)
+        }else{
+            initView()
         }
     }
 
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
             requestAllPermissions(*permissions)
+        }else {
+            initView()
         }
-
-        initView()
     }
 
 
@@ -112,18 +113,12 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
                 } else {
                     toast("由于您拒绝App使用权限，App将无法使用")
                     finish()
+                    return
                     //Toast.makeText(this, "" + "权限" + permissions[i] + "申请失败", Toast.LENGTH_SHORT).show()
                 }
             }
-
             initView()
 
-//            if( grantResults[0] != PackageManager.PERMISSION_GRANTED){
-//                toast("由于您拒绝App使用读写存储设备权限，App将无法使用")
-//                finish()
-//            }else{
-//                initView()
-//            }
         }
     }
 

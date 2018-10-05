@@ -149,7 +149,7 @@
             app:timeTextColor="#000000"
             app:timeTextSize="@dimen/dp_12"
             app:isTimeTextBold="true"
-            app:suffixGravity="bottom"
+            app:suffixGravity="center"
             app:suffixTextColor="#000000"
             app:suffixTextSize="@dimen/dp_12"
             app:suffix=""

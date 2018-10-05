@@ -13,12 +13,12 @@ object Constants {
     val PAGE_SIZE=10
 
     //MOCK 地址
-    //val BASE_URL:String ="http://api.mingshz.com/mock/104/"
+    val BASE_URL:String ="http://api.mingshz.com/mock/104/"
 
     //测试地址
     //val BASE_URL:String= "http://mfapi.mifangtest.com/"
     //正式地址
-    val BASE_URL :String="http://cyfp.yhunba.cn/api/XYData/"
+    //val BASE_URL :String="http://cyfp.yhunba.cn/api/XYData/"
 
     /**
      * app版本检测地址

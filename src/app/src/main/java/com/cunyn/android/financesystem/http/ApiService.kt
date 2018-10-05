@@ -1,6 +1,5 @@
 package com.cunyn.android.financesystem.http
 
-import android.renderscript.Allocation
 import com.cunyn.android.financesystem.bean.*
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -17,6 +16,7 @@ interface ApiService {
     fun getLoginUIData(@Field("CustomerId") CustomerId: Long = 0)
             : Observable<ApiResult<LoginUIBean>>
 
+
     /**
      * 短信发送接口
      * UserMobile       是          手机号
@@ -28,7 +28,7 @@ interface ApiService {
     @FormUrlEncoded
     fun sendSmsCode(@Field("UserMobile") UserMobile: String
                     , @Field("SafeCode") SafeCode: String?
-                    , @Field("CustomerId") CustomerId: Long
+//                    , @Field("CustomerId") CustomerId: Long
                     , @Field("SafeKey") SafeKey:String?)
             : Observable<ApiResult<String?>>
 
@@ -39,7 +39,8 @@ interface ApiService {
     @FormUrlEncoded
     fun Login(@Field("UserMobile") UserMobile: String,
               @Field("VerifyCode") VerifyCode: String,
-              @Field("CustomerId") CustomerId: Long): Observable<ApiResult<UserBean>>
+              @Field("CustomerId") CustomerId: Long)
+            : Observable<ApiResult<UserBean>>
 
     /**
      * 图文验证码接口
@@ -130,10 +131,15 @@ interface ApiService {
     @POST("AuthBankCard")
     @FormUrlEncoded
     fun submitInfo(
-            @Field("RealName") RealName: String,
-            @Field("IdCardNo") IdCardNo :String,
-            @Field("UserMobile") UserMobile :String,
-            @Field("BankNo") BankNo: String)
+            @Field("id_card") id_card: String,
+            @Field("acc_no") acc_no :String,
+            @Field("id_holder") id_holder :String,
+            @Field("mobile") mobile: String,
+            @Field("card_type") card_type:String,
+            @Field("valid_date_year") valid_date_year:String,
+            @Field("valid_date_month") valid_date_month:String,
+            @Field("valid_no") valid_no:String ,
+            @Field("verify_element") verify_element:String)
             : Observable<ApiResult<Any?>>
 
     /**
@@ -141,6 +147,5 @@ interface ApiService {
      */
     @POST("GetRegisterContent")
     fun getRegisterContent():Observable<ApiResult<ProtocalBean?>>
-
 
 }

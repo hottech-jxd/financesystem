@@ -11,7 +11,13 @@ interface AuditionContract {
         fun submit(RealName : String , //	用户真实姓名
                    IdCardNo	:	String, //	身份证号
                    UserMobile: String	, //手机号
-                   BankNo:String )
+                   BankNo:String ,
+                   bankType :String ,
+                   bankYear:String,
+                   bankMonth:String,
+                   bankSafeCode:String,
+                   validateType:String
+                   )
 
         fun createPreOrder(txnType:String ,customerId: Long)
     }

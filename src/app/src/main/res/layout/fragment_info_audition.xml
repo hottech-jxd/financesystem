@@ -204,11 +204,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/info_bank_lay"
-                    android:layout_width="match_parent"
-                    android:layout_below="@id/info_idcard_lay"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                android:id="@+id/info_bank_lay"
+                android:layout_width="match_parent"
+                android:layout_below="@id/info_idcard_lay"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_gravity="center_vertical"
                     android:paddingTop="@dimen/dp_3"
@@ -250,6 +250,321 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
+            </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info_bank_mobile_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_mobile_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@id/info_bank_x"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="银行预留手机号码"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_mobile_label"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:paddingLeft="@dimen/dp_4"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:layout_alignTop="@id/info_bank_label"
+                        android:background="@drawable/shape_editext_bg2"
+                        android:layout_toRightOf="@id/info_bank_label"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:id="@+id/info_bank_mobile"
+                        android:hint="请输入银行卡预留手机号码"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dp_15"
+                        android:textColor="@color/text_color_2B3041"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:paddingTop="@dimen/dp_2"
+                    android:paddingBottom="@dimen/dp_2"
+                    android:id="@+id/info_bank_type_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_mobile_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_type_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@id/info_bank_x"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="卡片类型"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_type_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--<EditText-->
+                        <!--android:paddingLeft="@dimen/dp_4"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:paddingTop="@dimen/dp_10"-->
+                        <!--android:paddingBottom="@dimen/dp_10"-->
+                        <!--android:layout_alignTop="@id/info_bank_label"-->
+                        <!--android:background="@drawable/shape_editext_bg2"-->
+                        <!--android:layout_toRightOf="@id/info_bank_label"-->
+                        <!--android:layout_marginLeft="@dimen/dp_6"-->
+                        <!--android:layout_marginTop="@dimen/dp_4"-->
+                        <!--android:layout_marginBottom="@dimen/dp_4"-->
+                        <!--android:id="@+id/info_bank_type"-->
+                        <!--android:hint="请输入银行卡号类型"-->
+                        <!--android:singleLine="true"-->
+                        <!--android:textSize="@dimen/dp_15"-->
+                        <!--android:textColor="@color/text_color_2B3041"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content" />-->
+                    <CheckBox
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:id="@+id/info_bank_type_1"
+                        android:text="借记卡"
+                        android:tag="101"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <CheckBox
+                        android:id="@+id/info_bank_type_2"
+                        android:text="贷记卡"
+                        android:checked="false"
+                        android:tag="102"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/info_bank_year_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_type_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_year_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="卡有效期年"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_year_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:paddingLeft="@dimen/dp_4"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:layout_alignTop="@id/info_bank_label"
+                        android:background="@drawable/shape_editext_bg2"
+                        android:layout_toRightOf="@id/info_bank_label"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:id="@+id/info_bank_year"
+                        android:hint="请输入卡有效期年份"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dp_15"
+                        android:textColor="@color/text_color_2B3041"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/info_bank_month_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_year_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_month_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="卡有效期月"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_month_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:paddingLeft="@dimen/dp_4"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:background="@drawable/shape_editext_bg2"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:id="@+id/info_bank_month"
+                        android:hint="请输入卡有效期月份"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dp_15"
+                        android:textColor="@color/text_color_2B3041"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info_bank_safecode_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_month_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_safecode_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="信用卡安全码"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_safecode_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:paddingLeft="@dimen/dp_4"
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_10"
+                        android:paddingBottom="@dimen/dp_10"
+                        android:background="@drawable/shape_editext_bg2"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_4"
+                        android:id="@+id/info_bank_safecode"
+                        android:hint="请输入信用卡安全码"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dp_15"
+                        android:textColor="@color/text_color_2B3041"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/info_bank_validate_type_lay"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/info_bank_safecode_lay"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:paddingTop="@dimen/dp_3"
+                        android:paddingBottom="@dimen/dp_0"
+                        android:text="*"
+                        android:textColor="@color/text_color_F32727"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_validate_type_x"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_toRightOf="@id/info_bank_x"
+                        android:layout_marginTop="@dimen/dp_0"
+                        android:text="验证类型"
+                        android:textColor="#4c4c4c"
+                        android:textSize="@dimen/dp_15"
+                        android:id="@+id/info_bank_validate_type_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--<EditText-->
+                    <!--android:paddingLeft="@dimen/dp_4"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:paddingTop="@dimen/dp_10"-->
+                    <!--android:paddingBottom="@dimen/dp_10"-->
+                    <!--android:layout_alignTop="@id/info_bank_label"-->
+                    <!--android:background="@drawable/shape_editext_bg2"-->
+                    <!--android:layout_toRightOf="@id/info_bank_label"-->
+                    <!--android:layout_marginLeft="@dimen/dp_6"-->
+                    <!--android:layout_marginTop="@dimen/dp_4"-->
+                    <!--android:layout_marginBottom="@dimen/dp_4"-->
+                    <!--android:id="@+id/info_bank_type"-->
+                    <!--android:hint="请输入银行卡号类型"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textSize="@dimen/dp_15"-->
+                    <!--android:textColor="@color/text_color_2B3041"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+                    <CheckBox
+                        android:id="@+id/info_bank_validate_type_1"
+                        android:text="三要素验证"
+                        android:tag="123"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <CheckBox
+                        android:id="@+id/info_bank_validate_type_2"
+                        android:text="四要素验证"
+                        android:checked="false"
+                        android:tag="1234"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
                 <TextView
@@ -257,7 +572,7 @@
                     android:paddingLeft="@dimen/dp_0"
                     android:paddingRight="@dimen/dp_0"
                     android:id="@+id/info_desc"
-                    android:layout_below="@id/info_bank_lay"
+                    android:layout_below="@id/info_bank_validate_type_lay"
                     android:textSize="@dimen/dp_10"
                     android:textColor="@color/text_color_F32727"
                     android:text="注：带星号的必填"

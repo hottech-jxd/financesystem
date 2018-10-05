@@ -63,8 +63,24 @@ class AuditionPresenter(var view:AuditionContract.View)
                 .subscribe({}, {view.error()})
     }
 
-    override fun submit(RealName: String, IdCardNo: String, UserMobile: String, BankNo: String) {
-        model.submitInfo(RealName , IdCardNo , UserMobile , BankNo)
+    override fun submit(RealName: String
+                        , IdCardNo: String
+                        , UserMobile: String
+                        , BankNo: String,
+                        bankType :String ,
+                        bankYear:String,
+                        bankMonth:String,
+                        bankSafeCode:String,
+                        validateType:String) {
+        model.submitInfo(RealName
+                , IdCardNo
+                , UserMobile
+                , BankNo
+                , bankType
+                , bankYear
+                , bankMonth
+                , bankSafeCode
+                , validateType)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }
