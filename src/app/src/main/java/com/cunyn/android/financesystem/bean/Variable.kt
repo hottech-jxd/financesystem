@@ -18,5 +18,8 @@ object Variable {
      */
     var UserBean:UserBean?=null
 
-
+    /**
+     * http cookies
+     */
+    var CookiesSet:Set<String>?=null
 }

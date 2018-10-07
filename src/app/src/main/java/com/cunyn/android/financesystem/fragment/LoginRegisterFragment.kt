@@ -75,7 +75,6 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
         header_left_image.setOnClickListener(this)
         header_title.text="登录"
 
-
         loginregister_validatecode_picture.setOnClickListener(this)
         loginregister_login.setOnClickListener(this)
         loginregister_sendcode.setOnClickListener(this)
@@ -85,26 +84,15 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
 
         loginregister_markdown_lay.setOnClickListener(this)
 
-        //dataBind = DataBindingUtil.bind(rootView!!)!!
-
-        //var data = UserViewModel(8888)
-
-        //dataBind!!.bean = data
-
-
-
         fetchData()
     }
 
     override fun fetchData() {
-        viewModel.getPictureCode()
+
         viewModel.getLoginUIData(Constants.CUSTOMERID)
 
-//        var url = "http://img.mukewang.com/5ba60788000150aa06860936.png"
-//        var width = DensityUtils.getScreenWidth(context!!)
-//        var height = resources.getDimension(R.dimen.dp_150).toInt()
-//        FrescoDraweeController
-//                .loadImage(loginregister_bg , width , height, url , this )
+
+        //viewModel.getPictureCode()
     }
 
     override fun getLayoutResourceId(): Int {
@@ -145,7 +133,6 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
 
 
     private fun seeProtocal(){
-        //toast("totoddddd")
         viewModel.getRegisterContent()
     }
 
@@ -219,6 +206,8 @@ class LoginRegisterFragment : BaseFragment<LoginContract.Presenter>()
     }
 
     override fun getLoginUIDataCallback(apiResult: ApiResult<LoginUIBean>) {
+        viewModel.getPictureCode()
+
         if(apiResult.code!= ApiResultCodeEnum.SUCCESS.code){
             toast(apiResult.message)
             return

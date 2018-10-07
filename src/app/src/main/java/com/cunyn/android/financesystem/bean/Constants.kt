@@ -13,12 +13,12 @@ object Constants {
     val PAGE_SIZE=10
 
     //MOCK 地址
-    val BASE_URL:String ="http://api.mingshz.com/mock/104/"
+    //val BASE_URL:String ="http://api.mingshz.com/mock/104/"
 
     //测试地址
     //val BASE_URL:String= "http://mfapi.mifangtest.com/"
     //正式地址
-    //val BASE_URL :String="http://cyfp.yhunba.cn/api/XYData/"
+    val BASE_URL :String="http://cyfp.yhunba.cn/api/XYData/"
 
     /**
      * app版本检测地址
@@ -63,6 +63,7 @@ object Constants {
     val PREF_LANGUAGE="pref_language"
     val PREF_CURRENCY="pref_currency"
     val PREF_SHOW_GUIDE="pref_show_guide"
+    val PREF_COOKIE="pref_cookie"
 
     val ACTION_AUTH_FINISH="com.huotu.android.phonerecycle.action_auth_finish"
     val ACTION_AUTH_CHANGE="com.huotu.android.phonerecycle.action_auth_change"

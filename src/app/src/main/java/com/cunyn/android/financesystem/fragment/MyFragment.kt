@@ -80,7 +80,7 @@ BaseQuickAdapter.RequestLoadMoreListener{
 
         myAdapter!!.setOnLoadMoreListener(this, my_recyclerview)
 
-        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId , pageIndex , Constants.PAGE_SIZE)
+        iPresenter.getApplyRecords(Constants.CUSTOMERID , Variable.UserBean!!.UserId , pageIndex+1 , Constants.PAGE_SIZE)
     }
 
     override fun fetchData() {

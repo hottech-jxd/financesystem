@@ -199,7 +199,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             toast("请输入银行预留手机号")
             return
         }
-        if (MobileUtils.isPhone(mobiel)) {
+        if (!MobileUtils.isPhone(mobiel)) {
             info_bank_mobile.requestFocus()
             KeybordUtils.openKeybord(context!!, info_bank_mobile)
             toast("请输入正确的手机号")
@@ -222,6 +222,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             info_bank_safecode.requestFocus()
             KeybordUtils.openKeybord(context!!, info_bank_safecode)
             toast("请输入信用卡安全码")
+            return
         }
 
 

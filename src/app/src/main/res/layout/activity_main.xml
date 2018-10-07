@@ -14,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.cunyn.android.financesystem.widget.ProgressWidget
-        android:layout_width="match_parent"
-        android:id="@+id/main_progress"
-        android:visibility="gone"
-        android:layout_height="match_parent"/>
+    <!--<com.cunyn.android.financesystem.widget.ProgressWidget-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/main_progress"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_height="match_parent"/>-->
 
 </android.support.constraint.ConstraintLayout>

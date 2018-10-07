@@ -10,6 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import com.cunyn.android.financesystem.base.BaseApplication
+
+
 
 object RetrofitManager {
     private var headerIntercepter:HeaderIntercepter?=null
@@ -27,6 +30,14 @@ object RetrofitManager {
         return headerIntercepter!!
     }
 
+    private fun provideReceiveCookieInterceptor(): ReceiveCookieInterceptor {
+        return ReceiveCookieInterceptor()
+    }
+
+    private fun provideAddCookieInterceptor(): AddCookieIntercepter {
+        return AddCookieIntercepter()
+    }
+
     private fun provideOkHttpClient( headerIntercepter: HeaderIntercepter):OkHttpClient?{
 
         if(okHttpClient==null){
@@ -34,6 +45,8 @@ object RetrofitManager {
                 .readTimeout(Constants.READ_TIMEOUT , TimeUnit.SECONDS)
                 .connectTimeout(Constants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Constants.WRITE_TIMEOUT , TimeUnit.SECONDS)
+                    .addInterceptor( provideAddCookieInterceptor() )
+                    .addInterceptor(provideReceiveCookieInterceptor())
                 //.addInterceptor(headerIntercepter)
 
             if(BuildConfig.DEBUG){

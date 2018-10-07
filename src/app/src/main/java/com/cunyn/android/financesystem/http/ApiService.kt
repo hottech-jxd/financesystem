@@ -53,7 +53,7 @@ interface ApiService {
      * APP首页广告接口
      *
      */
-    @GET("APPADV")
+    @POST("APPADV")
     fun getIndexUIData(@Query("CustomerId") CustomerId: Long)
             : Observable<ApiResult<ArrayList<IndexUIBean>?>>
 
