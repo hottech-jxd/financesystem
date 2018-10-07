@@ -216,8 +216,8 @@
                 android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_10"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40" />
+                android:layout_width="@dimen/dp_38"
+                android:layout_height="@dimen/dp_38" />
             <TextView
                 android:id="@+id/loginregister_protocal_text"
                 android:layout_marginLeft="@dimen/dp_0"

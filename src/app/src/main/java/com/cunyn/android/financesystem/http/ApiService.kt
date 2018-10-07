@@ -80,7 +80,7 @@ interface ApiService {
     @POST("GetShopList")
     @FormUrlEncoded
     fun getTradeRecord(@Field("UserId") UserId: Long
-                       , @Field("CustomerId" ) CustomerId: Long
+                       //, @Field("CustomerId" ) CustomerId: Long
                         ,@Field("page") page:Int
                         ,@Field("size") size:Int)
             : Observable<ApiResult<ArrayList<TradeRecordBean>?>>
@@ -94,8 +94,8 @@ interface ApiService {
     @POST("MailRequest")
     @FormUrlEncoded
     fun uploadConstract(@Field("UserMobile") UserMobile: String
-                        , @Field("CustomerId") CustomerId: Long,
-                        @Field("MailList") MailList: String?)
+                        //, @Field("CustomerId") CustomerId: Long
+                        ,@Field("MailList") MailList: String?)
             : Observable<ApiResult<Any?>>
 
     /**

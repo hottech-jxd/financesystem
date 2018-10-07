@@ -38,7 +38,7 @@ BaseQuickAdapter.RequestLoadMoreListener{
     private var datas = ArrayList<TradeRecordBean>()
     private var myAdapter:MyAdapter?=null
     var iPresenter=MyPresenter(this)
-    var pageIndex=-1
+    var pageIndex=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

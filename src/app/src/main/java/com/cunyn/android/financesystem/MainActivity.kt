@@ -16,10 +16,14 @@ import com.cunyn.android.financesystem.fragment.IndexFragment
 import com.cunyn.android.financesystem.fragment.LoginRegisterFragment
 import com.cunyn.android.financesystem.mvp.IPresenter
 import com.cunyn.android.financesystem.mvp.InitPresenter
+import com.cunyn.android.financesystem.util.BackHandlerHelper
 import com.guoxintaiyi.android.missionwallet.base.OnFragmentEventListener
 
 class MainActivity : BaseActivity<InitContract.Presenter>(),
         InitContract.View,OnFragmentEventListener{
+
+    private var mExitTime=0L
+    private var toast:Toast?=null
 
     private val permissions = arrayOf<String>(
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -151,6 +155,25 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
                     .beginTransaction()
                     .replace(R.id.main_container, indexFragment)
                     .commit()
+        }
+    }
+
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+
+        if(!BackHandlerHelper.handleBackPress(this)){
+
+            if (System.currentTimeMillis().minus(mExitTime) <= 3000) {
+                finish()
+                if(toast!=null){
+                    toast!!.cancel()
+                }
+            } else {
+                mExitTime = System.currentTimeMillis()
+                toast = showToast("再按一次退出程序")
+            }
+
         }
     }
 }

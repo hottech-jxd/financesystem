@@ -14,7 +14,6 @@ class ApiModel  {
 
     fun sendSmsCode(phone:String, safeCode:String?, customerId:Long , safeKey:String?)
             :Observable<ApiResult<String?>>{
-        //val apiService = RetrofitManager.getApiService()
         return apiService!!.sendSmsCode(phone , safeCode ,  safeKey)
     }
 
@@ -44,7 +43,7 @@ class ApiModel  {
 
     fun uploadContracts(userMobile: String , customerId: Long, contracts:String?)
     :Observable<ApiResult<Any?>>{
-        return apiService!!.uploadConstract(userMobile , customerId, contracts)
+        return apiService!!.uploadConstract(userMobile , contracts)
     }
 
     fun submitInfo(realName:String,
@@ -61,15 +60,17 @@ class ApiModel  {
                 idCard ,
                 bankNo ,
                 realName ,
-                mobile ,"","","",
-                "",""
-
-                )
+                mobile ,
+                bankType,
+                bankYear,
+                bankMonth,
+                bankSafeCode,
+                validateType)
     }
 
     fun getApplyRecords(customerId: Long,userId: Long, page:Int,size:Int)
     :Observable<ApiResult<ArrayList<TradeRecordBean>?>>{
-        return apiService!!.getTradeRecord(userId , customerId, page, size)
+        return apiService!!.getTradeRecord(userId , page, size)
     }
 
     fun getRegisterContent(customerId: Long)
