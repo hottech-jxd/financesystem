@@ -2,7 +2,7 @@ package com.cunyn.android.financesystem.fragment
 
 
 import android.content.Context
-import android.databinding.DataBindingUtil
+//import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.CalendarContract
