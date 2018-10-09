@@ -16,10 +16,14 @@ import com.cunyn.android.financesystem.fragment.IndexFragment
 import com.cunyn.android.financesystem.fragment.LoginRegisterFragment
 import com.cunyn.android.financesystem.mvp.IPresenter
 import com.cunyn.android.financesystem.mvp.InitPresenter
+import com.cunyn.android.financesystem.util.BackHandlerHelper
 import com.guoxintaiyi.android.missionwallet.base.OnFragmentEventListener
 
 class MainActivity : BaseActivity<InitContract.Presenter>(),
         InitContract.View,OnFragmentEventListener{
+
+    private var mExitTime=0L
+    private var toast:Toast?=null
 
     private val permissions = arrayOf<String>(
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -38,23 +42,11 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
 
         checkPermission()
 
-        //initView()
     }
 
 
     private fun initView(){
-
-        iPresenter.init(Constants.CUSTOMERID)
-
-
-//        var loginRegisterFragment = LoginRegisterFragment.newInstance("","")
-//        loginRegisterFragment.closeListener=this
-//
-//        supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.main_container , loginRegisterFragment)
-//                .commit()
-
+        checkLogin()
     }
 
     override fun onOpen( type :Int ) {
@@ -98,19 +90,18 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
         if (lacksPermissions(*permissions)) {
             ActivityCompat.requestPermissions(this,
                     permissions, REQUEST_CODE)
+        }else{
+            initView()
         }
     }
 
-    //private val permissions = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, READ_CONTACTS)//,READ_CONTACTS
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-
             requestAllPermissions(*permissions)
+        }else {
+            initView()
         }
-
-        initView()
     }
 
 
@@ -126,28 +117,27 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
                 } else {
                     toast("由于您拒绝App使用权限，App将无法使用")
                     finish()
+                    return
                     //Toast.makeText(this, "" + "权限" + permissions[i] + "申请失败", Toast.LENGTH_SHORT).show()
                 }
             }
-
             initView()
 
-//            if( grantResults[0] != PackageManager.PERMISSION_GRANTED){
-//                toast("由于您拒绝App使用读写存储设备权限，App将无法使用")
-//                finish()
-//            }else{
-//                initView()
-//            }
         }
     }
 
     override fun initCallback(apiResult: ApiResult<Any>) {
 
-        if(apiResult.code !=ApiResultCodeEnum.SUCCESS.code){
-            toast( apiResult.message)
-            return
-        }
+//        if(apiResult.code !=ApiResultCodeEnum.SUCCESS.code){
+//            toast( apiResult.message)
+//            return
+//        }
 
+
+    }
+
+
+    private fun checkLogin(){
         if(Variable.UserBean==null) {
 
             var loginRegisterFragment = LoginRegisterFragment.newInstance("", "")
@@ -165,6 +155,25 @@ class MainActivity : BaseActivity<InitContract.Presenter>(),
                     .beginTransaction()
                     .replace(R.id.main_container, indexFragment)
                     .commit()
+        }
+    }
+
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+
+        if(!BackHandlerHelper.handleBackPress(this)){
+
+            if (System.currentTimeMillis().minus(mExitTime) <= 3000) {
+                finish()
+                if(toast!=null){
+                    toast!!.cancel()
+                }
+            } else {
+                mExitTime = System.currentTimeMillis()
+                toast = showToast("再按一次退出程序")
+            }
+
         }
     }
 }

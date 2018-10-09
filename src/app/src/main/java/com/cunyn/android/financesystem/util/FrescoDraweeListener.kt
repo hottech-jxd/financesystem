@@ -49,14 +49,14 @@ class FrescoDraweeListener(iv: SimpleDraweeView
 
         val ivw = width
         val ivh = h * ivw / w
-        val layoutParams = ref!!.get()!!.getLayoutParams()
+        val layoutParams = ref!!.get()!!.layoutParams
         layoutParams.width = ivw
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
 
-        ref!!.get()!!.setLayoutParams(layoutParams)
+        ref!!.get()!!.layoutParams=layoutParams
 
         val ratio = w * 1.0f / h
-        ref!!.get()!!.setAspectRatio(ratio)
+        ref!!.get()!!.aspectRatio =ratio
 
         if (imageCallback != null) {
             imageCallback!!.imageCallback(ivw, ivh, ref!!.get()!!)
@@ -68,10 +68,10 @@ class FrescoDraweeListener(iv: SimpleDraweeView
         super.onFailure(id, throwable)
         if (ref!!.get() == null) return
 
-        val layoutParams = ref!!.get()!!.getLayoutParams()
+        val layoutParams = ref!!.get()!!.layoutParams
         layoutParams.width = width
         layoutParams.height = height
-        ref!!.get()!!.setLayoutParams(layoutParams)
+        ref!!.get()!!.layoutParams = layoutParams
         //float ratio = 1.0f;
         //ref.get().setAspectRatio(ratio);
 

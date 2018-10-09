@@ -10,11 +10,12 @@ interface IndexContract {
     interface Presenter:IPresenter{
         fun getIndexUIData(customerId: Long)
 
+        fun apply(userId:Long, customerId: Long)
 
     }
 
     interface View:IView<Presenter>{
-        fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>>)
-
+        fun getIndexUIDataCallback(apiResult: ApiResult<ArrayList<IndexUIBean>?>)
+        fun applyCallback(apiResult: ApiResult<Any?>)
     }
 }

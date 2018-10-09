@@ -1,11 +1,9 @@
 package com.cunyn.android.financesystem.mvp
 
 import android.arch.lifecycle.LifecycleOwner
-import com.cunyn.android.financesystem.bean.ApiResult
-import com.cunyn.android.financesystem.bean.ApiResultCodeEnum
-import com.cunyn.android.financesystem.bean.Constants
-import com.cunyn.android.financesystem.bean.UserBean
+import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.bindLifeCycle
+import com.cunyn.android.financesystem.util.ImageUtils
 import com.cunyn.android.financesystem.wrapper
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -29,8 +27,8 @@ class LoginPresenter(var view :LoginContract.View) : LoginContract.Presenter {
                 .subscribe({},{view.error()})
     }
 
-    override fun sendCode(phone: String, safecode: String?, customerId: Long) {
-        model.sendSmsCode(phone,safecode, customerId)
+    override fun sendCode(phone: String, safecode: String?, customerId: Long , safeKey:String?) {
+        model.sendSmsCode(phone,safecode, customerId , safeKey)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate{view.hideProgress()}
@@ -62,6 +60,12 @@ class LoginPresenter(var view :LoginContract.View) : LoginContract.Presenter {
 //        }
 //    }
 
+    private fun base64ToBitmap(result:ApiResult<VerifyCodeBean?>){
+        if(result.code == ApiResultCodeEnum.SUCCESS.code&& result.data!=null ){
+            result.data!!.imageBitmap = ImageUtils.stringtoBitmap(result.data!!.image)
+        }
+    }
+
     override fun getPictureCode() {
         model.getPictureCode()
                 .wrapper()
@@ -71,32 +75,30 @@ class LoginPresenter(var view :LoginContract.View) : LoginContract.Presenter {
                     //view.error()
                     it.printStackTrace()
                 }
-                .doAfterNext { view.getPictureCodecallback(it) }
+                .doAfterNext {
+
+
+                    base64ToBitmap(it)
+
+                    view.getPictureCodecallback(it)
+                }
                 .bindLifeCycle(view as LifecycleOwner)
                 .subscribe({},{view.error()})
 
 
-//        model.getPictureCode()
-//                .wrapper()
-//                .bindLifeCycle(view as LifecycleOwner)
-//                .subscribe( object : Observer<ApiResult<String>> {
-//                    override fun onComplete() {
-//                        view.hideProgress()
-//                    }
-//
-//                    override fun onSubscribe(d: Disposable) {
-//                        view.showProgress()
-//                    }
-//
-//                    override fun onNext(t: ApiResult<String>) {
-//                        view.getPictureCodecallback(t)
-//                    }
-//
-//                    override fun onError(e: Throwable) {
-//                        view.hideProgress()
-//                        view.error()
-//                    }
-//                })
+    }
+
+    override fun getRegisterContent() {
+        model.getRegisterContent(Constants.CUSTOMERID)
+                .wrapper()
+                .doOnSubscribe { view.showProgress() }
+                .doAfterTerminate { view.hideProgress() }
+                .doOnError { view.hideProgress()
+                    it.printStackTrace()
+                }
+                .doAfterNext {  view.getRegisterContentCallback(it) }
+                .bindLifeCycle(view as LifecycleOwner)
+                .subscribe({},{view.error()})
     }
 
     override fun onDestory() {

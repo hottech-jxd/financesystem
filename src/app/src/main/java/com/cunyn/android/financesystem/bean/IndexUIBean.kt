@@ -20,3 +20,8 @@ data class FeedbackBean(var QuestionText:String? , var CustomerMobile:String?,va
  * ApplyStatusStr:申请状态
  */
 data class TradeRecordBean(var ApplyTime:String?,var ApplyStatusStr:String?)
+
+
+data class ProtocalBean(var AgreementContent:String?)
+
+data class PreOrderBean(var DataId:String?)

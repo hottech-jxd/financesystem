@@ -3,15 +3,15 @@ import com.cunyn.android.financesystem.mvp.IPresenter
 import com.cunyn.android.financesystem.mvp.IView
 
 
-interface FaqContract {
+interface MyContract {
     interface Presenter:IPresenter{
-        fun getFaqData(customerId: Long)
+        fun getApplyRecords(customerId: Long, userId:Long, page:Int , size:Int)
 
 
     }
 
     interface View:IView<Presenter>{
-        fun getFagDataCallback(apiResult: ApiResult<FeedbackBean?>)
+        fun getApplyRecordsCallback(apiResult: ApiResult< ArrayList<TradeRecordBean>?>)
 
     }
 }

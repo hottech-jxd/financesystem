@@ -12,5 +12,5 @@ package com.cunyn.android.financesystem.bean
 data class ApiResult<T> (
     var code:Int=0,
     var message:String="",
-    var result:T?=null
+    var data:T?=null
     )

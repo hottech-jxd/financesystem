@@ -25,17 +25,18 @@ object XinYanSDKUtils {
     private var mActivity: Activity? = null
 
 
-    fun startSDK(activity: Activity, mermberid: String, terminalid: String, txnType: String, orderInfo: String, orderEn: String) {
+    fun startSDK(activity: Activity, mermberid: String, terminalid: String
+                 , txnType: String, userId : String , orderInfo: String, orderEn: String) {
         mActivity = activity
         mMemberId = mermberid
         mTerminaId = terminalid
         mTxnType = txnType
         mOrderEn = orderEn
 
-        getTask(mActivity, mTxnType, orderInfo, mOrderEn)
+        getTask(mActivity, mTxnType, userId , orderInfo, mOrderEn)
     }
 
-    fun getTask(mActivity: Activity?, txnType: String?, tradeNo: String, orderEn: String?): StartParams {
+    fun getTask(mActivity: Activity?, txnType: String?, userId: String , tradeNo: String, orderEn: String?): StartParams {
 
         //转对象传参数
         val startParams = StartParams()
@@ -43,8 +44,9 @@ object XinYanSDKUtils {
         startParams.type = txnType
         startParams.setmMemberId(mMemberId)
         startParams.setmTerminaId(mTerminaId)
-        startParams.user_id = tradeNo//TODO  自己提供
+        startParams.user_id = userId//TODO  自己提供
         startParams.tradeNo = tradeNo
+        //startParams.errorBackType=
 
         startParams.realname = XinYanData.realname
         startParams.idcard = XinYanData.idcard

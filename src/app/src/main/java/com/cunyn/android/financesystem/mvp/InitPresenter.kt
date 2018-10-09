@@ -18,7 +18,7 @@ class InitPresenter(var view :InitContract.View) : InitContract.Presenter {
 
 
 
-    override fun init(customerId: Long) {
+    override fun init(customerId: Long, delay:Long  ) {
 
 
         Observable.create( object : ObservableOnSubscribe<ApiResult<Any>> {
@@ -36,7 +36,7 @@ class InitPresenter(var view :InitContract.View) : InitContract.Presenter {
 
             emitter.onNext( apiResult )
             emitter.onComplete()
-            }}).wrapper()
+            }}).wrapper(delay)
                 .doAfterTerminate { view.hideProgress() }
                 .doOnSubscribe { view.showProgress() }
                 .doAfterNext { view.initCallback(it) }
@@ -45,20 +45,6 @@ class InitPresenter(var view :InitContract.View) : InitContract.Presenter {
                 .bindLifeCycle(view as LifecycleOwner)
                 .subscribe({},{view.error()})
 
-
-
-
-//        model.getIndexUIData(customerId)
-//                .wrapper()
-//                .doOnSubscribe { view.showProgress() }
-//                .doAfterTerminate { view.hideProgress() }
-//                .doOnError { view.hideProgress()
-//                it.printStackTrace()}
-//                .doAfterNext {
-//                    view.getIndexUIDataCallback(it)
-//                }
-//                .bindLifeCycle(view as LifecycleOwner)
-//                .subscribe({},{view.error()})
     }
 
 
