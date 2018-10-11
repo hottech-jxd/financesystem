@@ -48,8 +48,8 @@ class ApiModel  {
 
     fun submitInfo(realName:String,
                    idCard:String ,
-                   bankNo:String ,
                    mobile:String,
+                   bankNo:String ,
                    bankType :String ,
                    bankYear:String,
                    bankMonth:String,
