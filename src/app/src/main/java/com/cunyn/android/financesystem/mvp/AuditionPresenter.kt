@@ -71,7 +71,8 @@ class AuditionPresenter(var view:AuditionContract.View)
                         bankYear:String,
                         bankMonth:String,
                         bankSafeCode:String,
-                        validateType:String) {
+                        validateType:String,
+                        userId:String ) {
         model.submitInfo(RealName
                 , IdCardNo
                 , UserMobile
@@ -80,7 +81,8 @@ class AuditionPresenter(var view:AuditionContract.View)
                 , bankYear
                 , bankMonth
                 , bankSafeCode
-                , validateType)
+                , validateType
+                , userId)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }
@@ -90,8 +92,8 @@ class AuditionPresenter(var view:AuditionContract.View)
                 .subscribe({}, {view.error()})
     }
 
-    override fun createPreOrder(txnType: String , customerId: Long) {
-        model.createPreOrder(txnType , customerId)
+    override fun createPreOrder(txnType: String , customerId: Long , userID:Long) {
+        model.createPreOrder(txnType , customerId , userID)
                 .wrapper()
                 .doOnSubscribe { view.showProgress() }
                 .doAfterTerminate { view.hideProgress() }

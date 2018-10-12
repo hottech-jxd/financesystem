@@ -122,7 +122,8 @@ interface ApiService {
     @POST("CreatePreOrder")
     @FormUrlEncoded
     fun createPreOrder(@Field("txnType") txnType: String
-                    , @Field("CustomerId") CustomerId: Long)
+                    , @Field("CustomerId") CustomerId: Long
+                    , @Field("UserID") UserID:Long )
             : Observable<ApiResult<PreOrderBean?>>
 
     /**
@@ -135,11 +136,12 @@ interface ApiService {
             @Field("acc_no") acc_no :String,
             @Field("id_holder") id_holder :String,
             @Field("mobile") mobile: String,
-            @Field("card_type") card_type:String,
+            @Field("card_type") card_type:String="101",
             @Field("valid_date_year") valid_date_year:String,
             @Field("valid_date_month") valid_date_month:String,
             @Field("valid_no") valid_no:String ,
-            @Field("verify_element") verify_element:String)
+            @Field("verify_element") verify_element:String="1234",
+            @Field("UserID") UserID:String)
             : Observable<ApiResult<Any?>>
 
     /**

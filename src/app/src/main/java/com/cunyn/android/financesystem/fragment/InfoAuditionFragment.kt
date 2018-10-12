@@ -109,7 +109,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             }
             R.id.info_carrier_lay->{
                 //carrier()
-                iPresenter.createPreOrder( XinYan_CHANNEL.FUNCTION_CARRIER.channelName ,Constants.CUSTOMERID)
+                iPresenter.createPreOrder( XinYan_CHANNEL.FUNCTION_CARRIER.channelName ,Constants.CUSTOMERID, Variable.UserBean!!.UserId )
             }
             R.id.info_taobao->{
 //                XinYanSDKUtils.startSDK(activity!!
@@ -117,7 +117,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 //                        , BuildConfig.TERMINAL_ID
 //                        , XinYan_CHANNEL.FUNCTION_TAOBAO.channelName
 //                        , orderInfo , BuildConfig.ENVIRONMENT )
-                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_TAOBAO.channelName , Constants.CUSTOMERID)
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_TAOBAO.channelName , Constants.CUSTOMERID, Variable.UserBean!!.UserId)
 
             }
             R.id.info_jd->{
@@ -125,7 +125,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 //                        , BuildConfig.MEMBER_ID, BuildConfig.TERMINAL_ID
 //                        , XinYan_CHANNEL.FUNCTION_JINGDONG.channelName
 //                        , orderInfo, BuildConfig.ENVIRONMENT)
-                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_JINGDONG.channelName , Constants.CUSTOMERID)
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_JINGDONG.channelName , Constants.CUSTOMERID, Variable.UserBean!!.UserId)
 
             }
             R.id.info_gjj->{
@@ -133,7 +133,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 //                        , BuildConfig.MEMBER_ID , BuildConfig.TERMINAL_ID
 //                        , XinYan_CHANNEL.FUNCTION_FUND.channelName
 //                        , orderInfo, BuildConfig.ENVIRONMENT)
-                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_FUND.channelName,Constants.CUSTOMERID)
+                iPresenter.createPreOrder(XinYan_CHANNEL.FUNCTION_FUND.channelName,Constants.CUSTOMERID, Variable.UserBean!!.UserId)
 
             }
             R.id.info_agree->{
@@ -160,10 +160,10 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
         var idcard = info_idcard.text.trim().toString()
         var bankno = info_bank.text.trim().toString()
         var mobile = Variable.UserBean!!.UserName
-        var bankType = "" //if (info_bank_type_1.isChecked) "101" else "102"
+        var bankType = "101" //if (info_bank_type_1.isChecked) "101" else "102"
         var bankYear = ""//info_bank_year.text.trim().toString()
         var bankMonth = ""//info_bank_month.text.trim().toString()
-        var validateType = ""// if (info_bank_validate_type_1.isChecked) "123" else "1234"
+        var validateType = "1234"// if (info_bank_validate_type_1.isChecked) "123" else "1234"
         var safeCode = "" // info_bank_safecode.text.trim().toString()
 
         if (TextUtils.isEmpty(realname)) {
@@ -226,6 +226,7 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 //        }
 
 
+        var userId = Variable.UserBean!!.UserId.toString()
         iPresenter.submit(realname
                 , idcard
                 , mobile!!
@@ -234,7 +235,9 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
                 bankYear,
                 bankMonth,
                 safeCode,
-                validateType)
+                validateType,
+                userId
+                )
     }
 
     private fun contract(){

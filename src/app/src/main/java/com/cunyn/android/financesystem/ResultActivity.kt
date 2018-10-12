@@ -179,12 +179,14 @@ class ResultActivity : Activity() {
         }
     }
 
-    fun loadOrderInFo(url: String): String {
-        Log.i(ResultActivity::class.simpleName ,"loadOrderInFo url = $url")
+    fun loadOrderInFo( url: String?): String {
+        var urlex = url
+        if(url==null) urlex =""
+        //Log.i(ResultActivity::class.simpleName ,"loadOrderInFo url = $urlex")
         val json = StringBuilder()
         val inReader : BufferedReader
         try {
-            val urlObject = URL(url)
+            val urlObject = URL(urlex)
             val uc = urlObject.openConnection() as HttpURLConnection
             uc.addRequestProperty("memberId", XinYanData.memberId)
             inReader = BufferedReader(InputStreamReader(uc.inputStream))

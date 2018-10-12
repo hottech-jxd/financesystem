@@ -16,10 +16,11 @@ interface AuditionContract {
                    bankYear:String,
                    bankMonth:String,
                    bankSafeCode:String,
-                   validateType:String
+                   validateType:String,
+                   userId:String
                    )
 
-        fun createPreOrder(txnType:String ,customerId: Long)
+        fun createPreOrder(txnType:String ,customerId: Long, userID:Long)
     }
 
     interface View:IView<Presenter>{

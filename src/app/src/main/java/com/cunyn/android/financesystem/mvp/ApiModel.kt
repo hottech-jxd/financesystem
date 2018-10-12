@@ -54,7 +54,8 @@ class ApiModel  {
                    bankYear:String,
                    bankMonth:String,
                    bankSafeCode:String,
-                   validateType:String)
+                   validateType:String,
+                   userId:String)
     :Observable<ApiResult<Any?>>{
         return apiService!!.submitInfo(
                 idCard ,
@@ -65,7 +66,8 @@ class ApiModel  {
                 bankYear,
                 bankMonth,
                 bankSafeCode,
-                validateType)
+                validateType,
+                userId)
     }
 
     fun getApplyRecords(customerId: Long,userId: Long, page:Int,size:Int)
@@ -78,8 +80,8 @@ class ApiModel  {
         return apiService!!.getRegisterContent()
     }
 
-    fun createPreOrder(txType:String , customerId: Long)
+    fun createPreOrder(txType:String , customerId: Long , userId: Long)
         :Observable<ApiResult<PreOrderBean?>>{
-        return apiService!!.createPreOrder(txType , customerId)
+        return apiService!!.createPreOrder(txType , customerId, userId )
     }
 }

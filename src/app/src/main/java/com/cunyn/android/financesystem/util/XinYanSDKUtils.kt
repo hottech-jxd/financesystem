@@ -71,7 +71,7 @@ object XinYanSDKUtils {
         try {
             XinYanSDK.getInstance().start(mActivity, startParams, object : XYBDResultCallback {
                 override fun onCallBack(xinyanCallBackData: XinyanCallBackData) {
-                    openResultActivity(mActivity, xinyanCallBackData)
+                    //openResultActivity(mActivity, xinyanCallBackData)
                     XinYanData.titleConfig.setmTitle("")//这里是为了下次做任务不带之前设置的title，走默认的title
                 }
 
