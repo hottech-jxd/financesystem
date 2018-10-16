@@ -16,10 +16,7 @@ import com.cunyn.android.financesystem.R
 import com.cunyn.android.financesystem.bean.*
 import com.cunyn.android.financesystem.mvp.AuditionPresenter
 import com.cunyn.android.financesystem.mvp.IPresenter
-import com.cunyn.android.financesystem.util.IDCardUtils
-import com.cunyn.android.financesystem.util.KeybordUtils
-import com.cunyn.android.financesystem.util.MobileUtils
-import com.cunyn.android.financesystem.util.XinYanSDKUtils
+import com.cunyn.android.financesystem.util.*
 import com.cunyn.android.financesystem.widget.CarrierDialog
 import com.cunyn.android.financesysten.util.DensityUtils
 import com.facebook.drawee.view.SimpleDraweeView
@@ -151,6 +148,15 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
 
 
     private fun submit() {
+        if(!Variable.IsUploadContract){
+            toast("请先提交通讯录数据")
+            return
+        }
+        if(!Variable.IsUploadCarrier){
+            toast("请先提交运营商数据")
+            return
+        }
+
         if (!isAgree) {
             toast("请勾选")
             return
@@ -304,6 +310,11 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
             toast(apiResult.message)
             return
         }
+
+        Variable.IsUploadContract=true
+        SPUtils.getInstance(context!!,Constants.PREF_FILENAME)
+                .writeBoolean(Constants.PREF_UPLOADCONTRACT, Variable.IsUploadContract)
+
         toast(apiResult.message)
     }
 
@@ -357,7 +368,6 @@ class InfoAuditionFragment : BaseFragment<AuditionContract.Presenter>()
          * @param param2 Parameter 2.
          * @return A new instance of fragment InfoAuditionFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
                 InfoAuditionFragment().apply {

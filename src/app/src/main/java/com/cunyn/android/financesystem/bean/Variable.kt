@@ -22,4 +22,13 @@ object Variable {
      * http cookies
      */
     var CookiesSet:Set<String>?=null
+    /**
+     * 是否已经上传了通讯录
+     */
+    var IsUploadContract=false
+
+    /**
+     * 是否授权了运营商数据
+     */
+    var IsUploadCarrier=false
 }

@@ -7,7 +7,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.cunyn.android.financesystem.ResultActivity
+import com.cunyn.android.financesystem.base.BaseApplication
+import com.cunyn.android.financesystem.bean.Constants
+import com.cunyn.android.financesystem.bean.Variable
 import com.cunyn.android.financesystem.bean.XinYanData
+import com.cunyn.android.financesystem.bean.XinYan_CHANNEL
 import com.xinyan.bigdata.XinYanSDK
 import com.xinyan.bigdata.bean.StartParams
 import com.xinyan.bigdata.bean.XinyanCallBackData
@@ -73,6 +77,12 @@ object XinYanSDKUtils {
                 override fun onCallBack(xinyanCallBackData: XinyanCallBackData) {
                     //openResultActivity(mActivity, xinyanCallBackData)
                     XinYanData.titleConfig.setmTitle("")//这里是为了下次做任务不带之前设置的title，走默认的title
+
+                    if( xinyanCallBackData.code != 0 && startParams.type == XinYan_CHANNEL.FUNCTION_CARRIER.channelName){
+                        Variable.IsUploadCarrier=true
+                        SPUtils.getInstance(BaseApplication.instance!! , Constants.PREF_FILENAME)
+                                .writeBoolean(Constants.PREF_UPLOADCARRIER , Variable.IsUploadContract)
+                    }
                 }
 
                 override fun onError(throwable: Throwable) {

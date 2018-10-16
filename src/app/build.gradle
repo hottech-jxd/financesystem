@@ -8,15 +8,13 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-    //useLibrary 'org.apache.http.legacy'
-
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.cunyn.android.financesystem"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,7 +36,7 @@ android {
             /*新颜SDK参数:商户Id*/
             buildConfigField("String", "MEMBER_ID", '"8000013189"')
             /*新颜SDK参数:运行环境：product/test */
-            buildConfigField("String", "ENVIRONMENT", '"product"')
+            buildConfigField("String", "ENVIRONMENT", '"test"')
 
             signingConfig signingConfigs.key
             minifyEnabled false

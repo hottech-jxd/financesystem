@@ -64,6 +64,8 @@ object Constants {
     val PREF_CURRENCY="pref_currency"
     val PREF_SHOW_GUIDE="pref_show_guide"
     val PREF_COOKIE="pref_cookie"
+    val PREF_UPLOADCONTRACT="pref_uploadcontract"
+    val PREF_UPLOADCARRIER="pref_uploadcarrier"
 
     val ACTION_AUTH_FINISH="com.huotu.android.phonerecycle.action_auth_finish"
     val ACTION_AUTH_CHANGE="com.huotu.android.phonerecycle.action_auth_change"

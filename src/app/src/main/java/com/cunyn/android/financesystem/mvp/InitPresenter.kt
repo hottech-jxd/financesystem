@@ -20,30 +20,35 @@ class InitPresenter(var view :InitContract.View) : InitContract.Presenter {
 
     override fun init(customerId: Long, delay:Long  ) {
 
+        Observable.create<ApiResult<Any>> { emitter ->
 
-        Observable.create( object : ObservableOnSubscribe<ApiResult<Any>> {
+            var json = SPUtils.getInstance(BaseApplication.instance!!, Constants.PREF_FILENAME)
+                    .readString(Constants.PREF_USER)
+            if (!TextUtils.isEmpty(json)) {
+                Variable.UserBean = GsonUtils.toObject(json, UserBean::class.java)
+            }
 
-            override fun subscribe(emitter: ObservableEmitter<ApiResult<Any>>) {
+            Variable.IsUploadContract = SPUtils.getInstance(BaseApplication.instance!!, Constants.PREF_FILENAME)
+                    .readBoolean(Constants.PREF_UPLOADCONTRACT, false)
+            Variable.IsUploadCarrier = SPUtils.getInstance(BaseApplication.instance!!, Constants.PREF_FILENAME)
+                    .readBoolean(Constants.PREF_UPLOADCARRIER, false)
 
-                var json = SPUtils.getInstance(BaseApplication.instance!!,Constants.PREF_FILENAME)
-                        .readString(Constants.PREF_USER)
-                if( !TextUtils.isEmpty(json)){
-                    Variable.UserBean = GsonUtils.toObject( json , UserBean::class.java)
-                }
-                var apiResult = ApiResult<Any>()
-                apiResult.code = ApiResultCodeEnum.SUCCESS.code
-                apiResult.message=""
+            var apiResult = ApiResult<Any>()
+            apiResult.code = ApiResultCodeEnum.SUCCESS.code
+            apiResult.message = ""
 
-            emitter.onNext( apiResult )
+            emitter.onNext(apiResult)
             emitter.onComplete()
-            }}).wrapper(delay)
+        }.wrapper(delay)
                 .doAfterTerminate { view.hideProgress() }
                 .doOnSubscribe { view.showProgress() }
                 .doAfterNext { view.initCallback(it) }
-                .doOnError { view.hideProgress()
-                    it.printStackTrace() }
+                .doOnError {
+                    view.hideProgress()
+                    it.printStackTrace()
+                }
                 .bindLifeCycle(view as LifecycleOwner)
-                .subscribe({},{view.error()})
+                .subscribe({}, { view.error() })
 
     }
 
